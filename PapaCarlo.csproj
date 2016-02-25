@@ -62,6 +62,18 @@
     <Compile Include="CellsListForm.Designer.cs">
       <DependentUpon>CellsListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContractorEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContractorEditForm.Designer.cs">
+      <DependentUpon>ContractorEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContractorsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContractorsListForm.Designer.cs">
+      <DependentUpon>ContractorsListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +85,18 @@
     </Compile>
     <Compile Include="EmployeesListForm.Designer.cs">
       <DependentUpon>EmployeesListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GoodEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoodEditForm.Designer.cs">
+      <DependentUpon>GoodEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GoodsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoodsListForm.Designer.cs">
+      <DependentUpon>GoodsListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -103,11 +127,23 @@
     <EmbeddedResource Include="CellsListForm.resx">
       <DependentUpon>CellsListForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ContractorEditForm.resx">
+      <DependentUpon>ContractorEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContractorsListForm.resx">
+      <DependentUpon>ContractorsListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EmployeeEditForm.resx">
       <DependentUpon>EmployeeEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeesListForm.resx">
       <DependentUpon>EmployeesListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GoodEditForm.resx">
+      <DependentUpon>GoodEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GoodsListForm.resx">
+      <DependentUpon>GoodsListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

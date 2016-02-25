@@ -133,11 +133,56 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Цвет.
+        /// </summary>
+        internal static string Color {
+            get {
+                return ResourceManager.GetString("Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Контрагент.
+        /// </summary>
+        internal static string Contractor {
+            get {
+                return ResourceManager.GetString("Contractor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Контрагенты.
+        /// </summary>
+        internal static string Contractors {
+            get {
+                return ResourceManager.GetString("Contractors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип контрагента.
+        /// </summary>
+        internal static string ContractorType {
+            get {
+                return ResourceManager.GetString("ContractorType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Создать.
         /// </summary>
         internal static string Create {
             get {
                 return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Покупатель.
+        /// </summary>
+        internal static string Customer {
+            get {
+                return ResourceManager.GetString("Customer", resourceCulture);
             }
         }
         
@@ -187,11 +232,38 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Товар.
+        /// </summary>
+        internal static string Good {
+            get {
+                return ResourceManager.GetString("Good", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Товары.
+        /// </summary>
+        internal static string Goods {
+            get {
+                return ResourceManager.GetString("Goods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Группа.
         /// </summary>
         internal static string Group {
             get {
                 return ResourceManager.GetString("Group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        internal static string ID {
+            get {
+                return ResourceManager.GetString("ID", resourceCulture);
             }
         }
         
@@ -250,6 +322,15 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поставщик.
+        /// </summary>
+        internal static string Provider {
+            get {
+                return ResourceManager.GetString("Provider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Поиск.
         /// </summary>
         internal static string Search {
@@ -300,6 +381,15 @@ namespace PapaCarlo.Properties {
         internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Артикул.
+        /// </summary>
+        internal static string VendorCode {
+            get {
+                return ResourceManager.GetString("VendorCode", resourceCulture);
             }
         }
     }

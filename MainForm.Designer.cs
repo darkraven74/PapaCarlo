@@ -31,15 +31,15 @@
             this.buttonEmployeesList = new System.Windows.Forms.Button();
             this.buttonStoragesList = new System.Windows.Forms.Button();
             this.buttonCellsList = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.buttonGoodsList = new System.Windows.Forms.Button();
+            this.buttonContractorsList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonEmployeesList
             // 
             this.buttonEmployeesList.Location = new System.Drawing.Point(13, 13);
             this.buttonEmployeesList.Name = "buttonEmployeesList";
-            this.buttonEmployeesList.Size = new System.Drawing.Size(75, 23);
+            this.buttonEmployeesList.Size = new System.Drawing.Size(85, 23);
             this.buttonEmployeesList.TabIndex = 0;
             this.buttonEmployeesList.Text = "button1";
             this.buttonEmployeesList.UseVisualStyleBackColor = true;
@@ -49,7 +49,7 @@
             // 
             this.buttonStoragesList.Location = new System.Drawing.Point(13, 43);
             this.buttonStoragesList.Name = "buttonStoragesList";
-            this.buttonStoragesList.Size = new System.Drawing.Size(75, 23);
+            this.buttonStoragesList.Size = new System.Drawing.Size(85, 23);
             this.buttonStoragesList.TabIndex = 1;
             this.buttonStoragesList.Text = "button2";
             this.buttonStoragesList.UseVisualStyleBackColor = true;
@@ -59,37 +59,39 @@
             // 
             this.buttonCellsList.Location = new System.Drawing.Point(13, 72);
             this.buttonCellsList.Name = "buttonCellsList";
-            this.buttonCellsList.Size = new System.Drawing.Size(75, 23);
+            this.buttonCellsList.Size = new System.Drawing.Size(85, 23);
             this.buttonCellsList.TabIndex = 2;
             this.buttonCellsList.Text = "button3";
             this.buttonCellsList.UseVisualStyleBackColor = true;
             this.buttonCellsList.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // buttonGoodsList
             // 
-            this.button4.Location = new System.Drawing.Point(13, 101);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.buttonGoodsList.Location = new System.Drawing.Point(13, 101);
+            this.buttonGoodsList.Name = "buttonGoodsList";
+            this.buttonGoodsList.Size = new System.Drawing.Size(85, 23);
+            this.buttonGoodsList.TabIndex = 3;
+            this.buttonGoodsList.Text = "button4";
+            this.buttonGoodsList.UseVisualStyleBackColor = true;
+            this.buttonGoodsList.Click += new System.EventHandler(this.buttonGoodsList_Click);
             // 
-            // button5
+            // buttonContractorsList
             // 
-            this.button5.Location = new System.Drawing.Point(13, 130);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.buttonContractorsList.Location = new System.Drawing.Point(13, 130);
+            this.buttonContractorsList.Name = "buttonContractorsList";
+            this.buttonContractorsList.Size = new System.Drawing.Size(85, 23);
+            this.buttonContractorsList.TabIndex = 4;
+            this.buttonContractorsList.Text = "button5";
+            this.buttonContractorsList.UseVisualStyleBackColor = true;
+            this.buttonContractorsList.Click += new System.EventHandler(this.buttonContragentsList_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.buttonContractorsList);
+            this.Controls.Add(this.buttonGoodsList);
             this.Controls.Add(this.buttonCellsList);
             this.Controls.Add(this.buttonStoragesList);
             this.Controls.Add(this.buttonEmployeesList);
@@ -105,7 +107,7 @@
         private System.Windows.Forms.Button buttonEmployeesList;
         private System.Windows.Forms.Button buttonStoragesList;
         private System.Windows.Forms.Button buttonCellsList;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button buttonGoodsList;
+        private System.Windows.Forms.Button buttonContractorsList;
     }
 }
