@@ -106,6 +106,24 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Тех. карта.
+        /// </summary>
+        internal static string Card {
+            get {
+                return ResourceManager.GetString("Card", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тех. карты.
+        /// </summary>
+        internal static string Cards {
+            get {
+                return ResourceManager.GetString("Cards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ячейка.
         /// </summary>
         internal static string Cell {
@@ -268,6 +286,15 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Входящие товары.
+        /// </summary>
+        internal static string InputGoods {
+            get {
+                return ResourceManager.GetString("InputGoods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Логин.
         /// </summary>
         internal static string Login {
@@ -291,6 +318,15 @@ namespace PapaCarlo.Properties {
         internal static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Исходящие товары.
+        /// </summary>
+        internal static string OutputGoods {
+            get {
+                return ResourceManager.GetString("OutputGoods", resourceCulture);
             }
         }
         

@@ -50,6 +50,18 @@
     <Compile Include="AuthorizationForm.Designer.cs">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CardEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CardEditForm.Designer.cs">
+      <DependentUpon>CardEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CardsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CardsListForm.Designer.cs">
+      <DependentUpon>CardsListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CellEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +132,12 @@
     </Compile>
     <EmbeddedResource Include="AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CardEditForm.resx">
+      <DependentUpon>CardEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CardsListForm.resx">
+      <DependentUpon>CardsListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CellEditForm.resx">
       <DependentUpon>CellEditForm.cs</DependentUpon>

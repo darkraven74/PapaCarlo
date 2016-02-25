@@ -20,6 +20,7 @@ namespace PapaCarlo
             buttonCellsList.Text = Properties.Resources.Cells;
             buttonGoodsList.Text = Properties.Resources.Goods;
             buttonContractorsList.Text = Properties.Resources.Contractors;
+            buttonCardsList.Text = Properties.Resources.Cards;
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
             this.Text = Properties.Resources.PapaCarlo;
@@ -57,6 +58,12 @@ namespace PapaCarlo
         private void buttonContragentsList_Click(object sender, EventArgs e)
         {
             ContractorsListForm f = new ContractorsListForm();
+            f.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CardsListForm f = new CardsListForm();
             f.ShowDialog();
         }
     }

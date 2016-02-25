@@ -33,6 +33,7 @@
             this.buttonCellsList = new System.Windows.Forms.Button();
             this.buttonGoodsList = new System.Windows.Forms.Button();
             this.buttonContractorsList = new System.Windows.Forms.Button();
+            this.buttonCardsList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonEmployeesList
@@ -85,11 +86,22 @@
             this.buttonContractorsList.UseVisualStyleBackColor = true;
             this.buttonContractorsList.Click += new System.EventHandler(this.buttonContragentsList_Click);
             // 
+            // buttonCardsList
+            // 
+            this.buttonCardsList.Location = new System.Drawing.Point(12, 159);
+            this.buttonCardsList.Name = "buttonCardsList";
+            this.buttonCardsList.Size = new System.Drawing.Size(85, 23);
+            this.buttonCardsList.TabIndex = 5;
+            this.buttonCardsList.Text = "button6";
+            this.buttonCardsList.UseVisualStyleBackColor = true;
+            this.buttonCardsList.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.buttonCardsList);
             this.Controls.Add(this.buttonContractorsList);
             this.Controls.Add(this.buttonGoodsList);
             this.Controls.Add(this.buttonCellsList);
@@ -109,5 +121,6 @@
         private System.Windows.Forms.Button buttonCellsList;
         private System.Windows.Forms.Button buttonGoodsList;
         private System.Windows.Forms.Button buttonContractorsList;
+        private System.Windows.Forms.Button buttonCardsList;
     }
 }

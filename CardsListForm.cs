@@ -10,17 +10,14 @@ using System.Windows.Forms;
 
 namespace PapaCarlo
 {
-    public partial class CellsListForm : Form
+    public partial class CardsListForm : Form
     {
-        public CellsListForm()
+        public CardsListForm()
         {
             InitializeComponent();
-            this.Text = Properties.Resources.Cells;
+            this.Text = Properties.Resources.Cards;
 
             labelSearch.Text = Properties.Resources.Search;
-            labelStorage.Text = Properties.Resources.Storage;
-            comboBoxStorages.DataSource = new List<String> { Properties.Resources.All,
-                "Склад 1", "Главный склад", "Склад в Пулково" };
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
 
@@ -34,78 +31,53 @@ namespace PapaCarlo
             dataGridView1.ScrollBars = ScrollBars.Both;
 
             DataGridViewTextBoxColumn col0 = new DataGridViewTextBoxColumn();
-            col0.HeaderText = Properties.Resources.Storage;
+            col0.HeaderText = Properties.Resources.Title;
 
             DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
-            col1.HeaderText = Properties.Resources.Description;
+            col1.HeaderText = Properties.Resources.InputGoods;
+
+            DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
+            col2.HeaderText = Properties.Resources.OutputGoods;
 
 
             dataGridView1.Columns.Add(col0);
             dataGridView1.Columns.Add(col1);
+            dataGridView1.Columns.Add(col2);
 
 
             DataGridViewCell cel0 = new DataGridViewTextBoxCell();
             DataGridViewCell cel1 = new DataGridViewTextBoxCell();
+            DataGridViewCell cel2 = new DataGridViewTextBoxCell();
             DataGridViewRow row = new DataGridViewRow();
-            cel0.Value = "Склад 1";
-            cel1.Value = "ячейка для стали";
-            row.Cells.AddRange(cel0, cel1);
+            cel0.Value = "Стул эконом (жесткий)";
+            cel1.Value = "2 Брус, 4 Саморез";
+            cel2.Value = "1 Стул эконом";
+            row.Cells.AddRange(cel0, cel1, cel2);
             dataGridView1.Rows.Add(row);
+
 
             cel0 = new DataGridViewTextBoxCell();
             cel1 = new DataGridViewTextBoxCell();
+            cel2 = new DataGridViewTextBoxCell();
             row = new DataGridViewRow();
-            cel0.Value = "Главный склад";
-            cel1.Value = "ячейка в углу";
-            row.Cells.AddRange(cel0, cel1);
+            cel0.Value = "Табурет";
+            cel1.Value = "1 Брус, 1 Клей";
+            cel2.Value = "1 Табурет";
+            row.Cells.AddRange(cel0, cel1, cel2);
             dataGridView1.Rows.Add(row);
-
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "Склад в Пулково";
-            cel1.Value = "ячейка для всего";
-            row.Cells.AddRange(cel0, cel1);
-            dataGridView1.Rows.Add(row);
-
 
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            CellEditForm f = new CellEditForm();
+            CardEditForm f = new CardEditForm();
             f.ShowDialog();
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            CellEditForm f = new CellEditForm();
+            CardEditForm f = new CardEditForm();
             f.ShowDialog();
-        }
-
-        private void labelStorage_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBoxStorages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelSearch_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
