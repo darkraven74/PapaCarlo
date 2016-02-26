@@ -39,6 +39,8 @@
             this.buttonMovementsList = new System.Windows.Forms.Button();
             this.buttonShipmentsList = new System.Windows.Forms.Button();
             this.buttonOperationsList = new System.Windows.Forms.Button();
+            this.buttonBalance = new System.Windows.Forms.Button();
+            this.buttonPrediction = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonEmployeesList
@@ -151,11 +153,33 @@
             this.buttonOperationsList.UseVisualStyleBackColor = true;
             this.buttonOperationsList.Click += new System.EventHandler(this.buttonOperationsList_Click);
             // 
+            // buttonBalance
+            // 
+            this.buttonBalance.Location = new System.Drawing.Point(121, 159);
+            this.buttonBalance.Name = "buttonBalance";
+            this.buttonBalance.Size = new System.Drawing.Size(127, 23);
+            this.buttonBalance.TabIndex = 11;
+            this.buttonBalance.Text = "button6";
+            this.buttonBalance.UseVisualStyleBackColor = true;
+            this.buttonBalance.Click += new System.EventHandler(this.buttonBalance_Click);
+            // 
+            // buttonPrediction
+            // 
+            this.buttonPrediction.Location = new System.Drawing.Point(121, 188);
+            this.buttonPrediction.Name = "buttonPrediction";
+            this.buttonPrediction.Size = new System.Drawing.Size(127, 23);
+            this.buttonPrediction.TabIndex = 12;
+            this.buttonPrediction.Text = "button6";
+            this.buttonPrediction.UseVisualStyleBackColor = true;
+            this.buttonPrediction.Click += new System.EventHandler(this.buttonPrediction_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(261, 222);
+            this.Controls.Add(this.buttonPrediction);
+            this.Controls.Add(this.buttonBalance);
             this.Controls.Add(this.buttonOperationsList);
             this.Controls.Add(this.buttonShipmentsList);
             this.Controls.Add(this.buttonMovementsList);
@@ -187,5 +211,7 @@
         private System.Windows.Forms.Button buttonMovementsList;
         private System.Windows.Forms.Button buttonShipmentsList;
         private System.Windows.Forms.Button buttonOperationsList;
+        private System.Windows.Forms.Button buttonBalance;
+        private System.Windows.Forms.Button buttonPrediction;
     }
 }

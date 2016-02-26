@@ -79,6 +79,15 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Группировать.
+        /// </summary>
+        internal static string Aggregate {
+            get {
+                return ResourceManager.GetString("Aggregate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Все.
         /// </summary>
         internal static string All {
@@ -93,6 +102,15 @@ namespace PapaCarlo.Properties {
         internal static string Authorization {
             get {
                 return ResourceManager.GetString("Authorization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Остаток.
+        /// </summary>
+        internal static string Balance {
+            get {
+                return ResourceManager.GetString("Balance", resourceCulture);
             }
         }
         
@@ -435,6 +453,15 @@ namespace PapaCarlo.Properties {
         internal static string Patronymic {
             get {
                 return ResourceManager.GetString("Patronymic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Прогноз.
+        /// </summary>
+        internal static string Predict {
+            get {
+                return ResourceManager.GetString("Predict", resourceCulture);
             }
         }
         

@@ -26,6 +26,8 @@ namespace PapaCarlo
             buttonMovementsList.Text = Properties.Resources.Movements;
             buttonShipmentsList.Text = Properties.Resources.Shipments;
             buttonOperationsList.Text = Properties.Resources.Operations;
+            buttonBalance.Text = Properties.Resources.Balance;
+            buttonPrediction.Text = Properties.Resources.Predict;
             
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
@@ -100,6 +102,18 @@ namespace PapaCarlo
         private void buttonOperationsList_Click(object sender, EventArgs e)
         {
             OperationsListForm f = new OperationsListForm();
+            f.ShowDialog();
+        }
+
+        private void buttonBalance_Click(object sender, EventArgs e)
+        {
+            BalanceForm f = new BalanceForm();
+            f.ShowDialog();
+        }
+
+        private void buttonPrediction_Click(object sender, EventArgs e)
+        {
+            BalancePredictionForm f = new BalancePredictionForm();
             f.ShowDialog();
         }
     }
