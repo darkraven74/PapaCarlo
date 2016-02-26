@@ -39,33 +39,44 @@ namespace PapaCarlo
             DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
             col1.HeaderText = Properties.Resources.Description;
 
+            DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
+            col2.HeaderText = Properties.Resources.ID;
+
 
             dataGridView1.Columns.Add(col0);
             dataGridView1.Columns.Add(col1);
+            dataGridView1.Columns.Add(col2);
+
 
 
             DataGridViewCell cel0 = new DataGridViewTextBoxCell();
             DataGridViewCell cel1 = new DataGridViewTextBoxCell();
+            DataGridViewCell cel2 = new DataGridViewTextBoxCell();
             DataGridViewRow row = new DataGridViewRow();
             cel0.Value = "Склад 1";
             cel1.Value = "ячейка для стали";
-            row.Cells.AddRange(cel0, cel1);
+            cel2.Value = "03";
+            row.Cells.AddRange(cel0, cel1, cel2);
             dataGridView1.Rows.Add(row);
 
             cel0 = new DataGridViewTextBoxCell();
             cel1 = new DataGridViewTextBoxCell();
+            cel2 = new DataGridViewTextBoxCell();
             row = new DataGridViewRow();
             cel0.Value = "Главный склад";
             cel1.Value = "ячейка в углу";
-            row.Cells.AddRange(cel0, cel1);
+            cel2.Value = "2";
+            row.Cells.AddRange(cel0, cel1, cel2);
             dataGridView1.Rows.Add(row);
 
             cel0 = new DataGridViewTextBoxCell();
             cel1 = new DataGridViewTextBoxCell();
+            cel2 = new DataGridViewTextBoxCell();
             row = new DataGridViewRow();
             cel0.Value = "Склад в Пулково";
             cel1.Value = "ячейка для всего";
-            row.Cells.AddRange(cel0, cel1);
+            cel2.Value = "5";
+            row.Cells.AddRange(cel0, cel1, cel2);
             dataGridView1.Rows.Add(row);
 
 

@@ -259,6 +259,24 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Из ячейки.
+        /// </summary>
+        internal static string FromCell {
+            get {
+                return ResourceManager.GetString("FromCell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Со склада.
+        /// </summary>
+        internal static string FromStorage {
+            get {
+                return ResourceManager.GetString("FromStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Товар.
         /// </summary>
         internal static string Good {
@@ -309,6 +327,24 @@ namespace PapaCarlo.Properties {
         internal static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Перемещение.
+        /// </summary>
+        internal static string Movement {
+            get {
+                return ResourceManager.GetString("Movement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Перемещения.
+        /// </summary>
+        internal static string Movements {
+            get {
+                return ResourceManager.GetString("Movements", resourceCulture);
             }
         }
         
@@ -394,6 +430,24 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отгрузка.
+        /// </summary>
+        internal static string Shipment {
+            get {
+                return ResourceManager.GetString("Shipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отгрузки.
+        /// </summary>
+        internal static string Shipments {
+            get {
+                return ResourceManager.GetString("Shipments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Склад.
         /// </summary>
         internal static string Storage {
@@ -471,6 +525,24 @@ namespace PapaCarlo.Properties {
         internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to В ячейку.
+        /// </summary>
+        internal static string ToCell {
+            get {
+                return ResourceManager.GetString("ToCell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to На склад.
+        /// </summary>
+        internal static string ToStorage {
+            get {
+                return ResourceManager.GetString("ToStorage", resourceCulture);
             }
         }
         

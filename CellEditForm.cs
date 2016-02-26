@@ -19,6 +19,7 @@ namespace PapaCarlo
 
             label1.Text = Properties.Resources.Storage;
             label2.Text = Properties.Resources.Description;
+            label3.Text = Properties.Resources.ID;
 
             comboBox1.DataSource = new List<String> { "Склад 1",
                 "Главный склад", "Склад в Пулково" };
