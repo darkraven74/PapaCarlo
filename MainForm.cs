@@ -21,6 +21,8 @@ namespace PapaCarlo
             buttonGoodsList.Text = Properties.Resources.Goods;
             buttonContractorsList.Text = Properties.Resources.Contractors;
             buttonCardsList.Text = Properties.Resources.Cards;
+            buttonSupplyContracts.Text = Properties.Resources.SupplyContracts;
+            buttonSupplyList.Text = Properties.Resources.Supplies;
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
             this.Text = Properties.Resources.PapaCarlo;
@@ -64,6 +66,18 @@ namespace PapaCarlo
         private void button1_Click(object sender, EventArgs e)
         {
             CardsListForm f = new CardsListForm();
+            f.ShowDialog();
+        }
+
+        private void buttonSupplyContracts_Click(object sender, EventArgs e)
+        {
+            SupplyContractsListForm f = new SupplyContractsListForm();
+            f.ShowDialog();
+        }
+
+        private void buttonSupplyList_Click(object sender, EventArgs e)
+        {
+            SupplyListForm f = new SupplyListForm();
             f.ShowDialog();
         }
     }

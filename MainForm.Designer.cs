@@ -34,6 +34,8 @@
             this.buttonGoodsList = new System.Windows.Forms.Button();
             this.buttonContractorsList = new System.Windows.Forms.Button();
             this.buttonCardsList = new System.Windows.Forms.Button();
+            this.buttonSupplyContracts = new System.Windows.Forms.Button();
+            this.buttonSupplyList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonEmployeesList
@@ -96,11 +98,33 @@
             this.buttonCardsList.UseVisualStyleBackColor = true;
             this.buttonCardsList.Click += new System.EventHandler(this.button1_Click);
             // 
+            // buttonSupplyContracts
+            // 
+            this.buttonSupplyContracts.Location = new System.Drawing.Point(121, 13);
+            this.buttonSupplyContracts.Name = "buttonSupplyContracts";
+            this.buttonSupplyContracts.Size = new System.Drawing.Size(127, 23);
+            this.buttonSupplyContracts.TabIndex = 6;
+            this.buttonSupplyContracts.Text = "button6";
+            this.buttonSupplyContracts.UseVisualStyleBackColor = true;
+            this.buttonSupplyContracts.Click += new System.EventHandler(this.buttonSupplyContracts_Click);
+            // 
+            // buttonSupplyList
+            // 
+            this.buttonSupplyList.Location = new System.Drawing.Point(121, 42);
+            this.buttonSupplyList.Name = "buttonSupplyList";
+            this.buttonSupplyList.Size = new System.Drawing.Size(127, 23);
+            this.buttonSupplyList.TabIndex = 7;
+            this.buttonSupplyList.Text = "button6";
+            this.buttonSupplyList.UseVisualStyleBackColor = true;
+            this.buttonSupplyList.Click += new System.EventHandler(this.buttonSupplyList_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.buttonSupplyList);
+            this.Controls.Add(this.buttonSupplyContracts);
             this.Controls.Add(this.buttonCardsList);
             this.Controls.Add(this.buttonContractorsList);
             this.Controls.Add(this.buttonGoodsList);
@@ -122,5 +146,7 @@
         private System.Windows.Forms.Button buttonGoodsList;
         private System.Windows.Forms.Button buttonContractorsList;
         private System.Windows.Forms.Button buttonCardsList;
+        private System.Windows.Forms.Button buttonSupplyContracts;
+        private System.Windows.Forms.Button buttonSupplyList;
     }
 }

@@ -130,6 +130,30 @@
     <Compile Include="StoragesListForm.Designer.cs">
       <DependentUpon>StoragesListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SuppluContractEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SuppluContractEditForm.Designer.cs">
+      <DependentUpon>SuppluContractEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SuppluEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SuppluEditForm.Designer.cs">
+      <DependentUpon>SuppluEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SupplyContractsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplyContractsListForm.Designer.cs">
+      <DependentUpon>SupplyContractsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SupplyListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplyListForm.Designer.cs">
+      <DependentUpon>SupplyListForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,6 +205,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StoragesListForm.resx">
       <DependentUpon>StoragesListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuppluContractEditForm.resx">
+      <DependentUpon>SuppluContractEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuppluEditForm.resx">
+      <DependentUpon>SuppluEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupplyContractsListForm.resx">
+      <DependentUpon>SupplyContractsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupplyListForm.resx">
+      <DependentUpon>SupplyListForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

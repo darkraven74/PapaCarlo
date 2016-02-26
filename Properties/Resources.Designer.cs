@@ -205,6 +205,15 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дата.
+        /// </summary>
+        internal static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Описание.
         /// </summary>
         internal static string Description {
@@ -313,6 +322,15 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Номер.
+        /// </summary>
+        internal static string Number {
+            get {
+                return ResourceManager.GetString("Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         internal static string OK {
@@ -399,6 +417,42 @@ namespace PapaCarlo.Properties {
         internal static string Storekeeper {
             get {
                 return ResourceManager.GetString("Storekeeper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поставки.
+        /// </summary>
+        internal static string Supplies {
+            get {
+                return ResourceManager.GetString("Supplies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поставка.
+        /// </summary>
+        internal static string Supply {
+            get {
+                return ResourceManager.GetString("Supply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дог. о поставке.
+        /// </summary>
+        internal static string SupplyContract {
+            get {
+                return ResourceManager.GetString("SupplyContract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дог. о поставках.
+        /// </summary>
+        internal static string SupplyContracts {
+            get {
+                return ResourceManager.GetString("SupplyContracts", resourceCulture);
             }
         }
         
