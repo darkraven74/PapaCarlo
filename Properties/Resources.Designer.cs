@@ -187,6 +187,15 @@ namespace PapaCarlo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Количество.
+        /// </summary>
+        internal static string Count {
+            get {
+                return ResourceManager.GetString("Count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Создать.
         /// </summary>
         internal static string Create {
@@ -372,6 +381,24 @@ namespace PapaCarlo.Properties {
         internal static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Операция.
+        /// </summary>
+        internal static string Operation {
+            get {
+                return ResourceManager.GetString("Operation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Операции.
+        /// </summary>
+        internal static string Operations {
+            get {
+                return ResourceManager.GetString("Operations", resourceCulture);
             }
         }
         

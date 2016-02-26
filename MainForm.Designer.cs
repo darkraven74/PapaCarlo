@@ -38,6 +38,7 @@
             this.buttonSupplyList = new System.Windows.Forms.Button();
             this.buttonMovementsList = new System.Windows.Forms.Button();
             this.buttonShipmentsList = new System.Windows.Forms.Button();
+            this.buttonOperationsList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonEmployeesList
@@ -140,11 +141,22 @@
             this.buttonShipmentsList.UseVisualStyleBackColor = true;
             this.buttonShipmentsList.Click += new System.EventHandler(this.buttonShipmentsList_Click);
             // 
+            // buttonOperationsList
+            // 
+            this.buttonOperationsList.Location = new System.Drawing.Point(121, 130);
+            this.buttonOperationsList.Name = "buttonOperationsList";
+            this.buttonOperationsList.Size = new System.Drawing.Size(127, 23);
+            this.buttonOperationsList.TabIndex = 10;
+            this.buttonOperationsList.Text = "button6";
+            this.buttonOperationsList.UseVisualStyleBackColor = true;
+            this.buttonOperationsList.Click += new System.EventHandler(this.buttonOperationsList_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.buttonOperationsList);
             this.Controls.Add(this.buttonShipmentsList);
             this.Controls.Add(this.buttonMovementsList);
             this.Controls.Add(this.buttonSupplyList);
@@ -174,5 +186,6 @@
         private System.Windows.Forms.Button buttonSupplyList;
         private System.Windows.Forms.Button buttonMovementsList;
         private System.Windows.Forms.Button buttonShipmentsList;
+        private System.Windows.Forms.Button buttonOperationsList;
     }
 }

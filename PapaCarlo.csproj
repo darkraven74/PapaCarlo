@@ -128,6 +128,18 @@
     <Compile Include="MovementsListForm.Designer.cs">
       <DependentUpon>MovementsListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperationEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationEditForm.Designer.cs">
+      <DependentUpon>OperationEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationsListForm.Designer.cs">
+      <DependentUpon>OperationsListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShipmentEditForm.cs">
@@ -219,6 +231,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MovementsListForm.resx">
       <DependentUpon>MovementsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationEditForm.resx">
+      <DependentUpon>OperationEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationsListForm.resx">
+      <DependentUpon>OperationsListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

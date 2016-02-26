@@ -39,31 +39,38 @@ namespace PapaCarlo
             DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
             col2.HeaderText = Properties.Resources.OutputGoods;
 
+            DataGridViewTextBoxColumn col3 = new DataGridViewTextBoxColumn();
+            col3.HeaderText = Properties.Resources.ID;
+
 
             dataGridView1.Columns.Add(col0);
             dataGridView1.Columns.Add(col1);
             dataGridView1.Columns.Add(col2);
-
+            dataGridView1.Columns.Add(col3);
 
             DataGridViewCell cel0 = new DataGridViewTextBoxCell();
             DataGridViewCell cel1 = new DataGridViewTextBoxCell();
             DataGridViewCell cel2 = new DataGridViewTextBoxCell();
+            DataGridViewCell cel3 = new DataGridViewTextBoxCell();
             DataGridViewRow row = new DataGridViewRow();
             cel0.Value = "Стул эконом (жесткий)";
             cel1.Value = "2 Брус, 4 Саморез";
             cel2.Value = "1 Стул эконом";
-            row.Cells.AddRange(cel0, cel1, cel2);
+            cel3.Value = "1";
+            row.Cells.AddRange(cel0, cel1, cel2, cel3);
             dataGridView1.Rows.Add(row);
 
 
             cel0 = new DataGridViewTextBoxCell();
             cel1 = new DataGridViewTextBoxCell();
             cel2 = new DataGridViewTextBoxCell();
+            cel3 = new DataGridViewTextBoxCell();
             row = new DataGridViewRow();
             cel0.Value = "Табурет";
             cel1.Value = "1 Брус, 1 Клей";
             cel2.Value = "1 Табурет";
-            row.Cells.AddRange(cel0, cel1, cel2);
+            cel3.Value = "2";
+            row.Cells.AddRange(cel0, cel1, cel2, cel3);
             dataGridView1.Rows.Add(row);
 
         }
