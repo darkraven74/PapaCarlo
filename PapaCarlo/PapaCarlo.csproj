@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\PapaCarlo.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\PapaCarlo.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{514618EF-5D51-4E03-9A25-2E6E22B395B3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PapaCarlo</RootNamespace>
+    <AssemblyName>PapaCarlo</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuthorizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthorizationForm.Designer.cs">
+      <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BalanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BalanceForm.Designer.cs">
+      <DependentUpon>BalanceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BalancePredictionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BalancePredictionForm.Designer.cs">
+      <DependentUpon>BalancePredictionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CardEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CardEditForm.Designer.cs">
+      <DependentUpon>CardEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CardsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CardsListForm.Designer.cs">
+      <DependentUpon>CardsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CellEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CellEditForm.Designer.cs">
+      <DependentUpon>CellEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CellsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CellsListForm.Designer.cs">
+      <DependentUpon>CellsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContractorEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContractorEditForm.Designer.cs">
+      <DependentUpon>ContractorEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContractorsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContractorsListForm.Designer.cs">
+      <DependentUpon>ContractorsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeEditForm.Designer.cs">
+      <DependentUpon>EmployeeEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeesListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeesListForm.Designer.cs">
+      <DependentUpon>EmployeesListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GoodEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoodEditForm.Designer.cs">
+      <DependentUpon>GoodEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GoodsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoodsListForm.Designer.cs">
+      <DependentUpon>GoodsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MovementEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MovementEditForm.Designer.cs">
+      <DependentUpon>MovementEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MovementsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MovementsListForm.Designer.cs">
+      <DependentUpon>MovementsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationEditForm.Designer.cs">
+      <DependentUpon>OperationEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperationsListForm.Designer.cs">
+      <DependentUpon>OperationsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShipmentEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShipmentEditForm.Designer.cs">
+      <DependentUpon>ShipmentEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShipmentsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShipmentsListForm.Designer.cs">
+      <DependentUpon>ShipmentsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StorageEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StorageEditForm.Designer.cs">
+      <DependentUpon>StorageEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StoragesListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StoragesListForm.Designer.cs">
+      <DependentUpon>StoragesListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SuppluContractEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SuppluContractEditForm.Designer.cs">
+      <DependentUpon>SuppluContractEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SuppluEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SuppluEditForm.Designer.cs">
+      <DependentUpon>SuppluEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SupplyContractsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplyContractsListForm.Designer.cs">
+      <DependentUpon>SupplyContractsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SupplyListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplyListForm.Designer.cs">
+      <DependentUpon>SupplyListForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AuthorizationForm.resx">
+      <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BalanceForm.resx">
+      <DependentUpon>BalanceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BalancePredictionForm.resx">
+      <DependentUpon>BalancePredictionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CardEditForm.resx">
+      <DependentUpon>CardEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CardsListForm.resx">
+      <DependentUpon>CardsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CellEditForm.resx">
+      <DependentUpon>CellEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CellsListForm.resx">
+      <DependentUpon>CellsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContractorEditForm.resx">
+      <DependentUpon>ContractorEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContractorsListForm.resx">
+      <DependentUpon>ContractorsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeeEditForm.resx">
+      <DependentUpon>EmployeeEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeesListForm.resx">
+      <DependentUpon>EmployeesListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GoodEditForm.resx">
+      <DependentUpon>GoodEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GoodsListForm.resx">
+      <DependentUpon>GoodsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MovementEditForm.resx">
+      <DependentUpon>MovementEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MovementsListForm.resx">
+      <DependentUpon>MovementsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationEditForm.resx">
+      <DependentUpon>OperationEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationsListForm.resx">
+      <DependentUpon>OperationsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ShipmentEditForm.resx">
+      <DependentUpon>ShipmentEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShipmentsListForm.resx">
+      <DependentUpon>ShipmentsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StorageEditForm.resx">
+      <DependentUpon>StorageEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StoragesListForm.resx">
+      <DependentUpon>StoragesListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuppluContractEditForm.resx">
+      <DependentUpon>SuppluContractEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuppluEditForm.resx">
+      <DependentUpon>SuppluEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupplyContractsListForm.resx">
+      <DependentUpon>SupplyContractsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupplyListForm.resx">
+      <DependentUpon>SupplyListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PapaCarloDBApp\PapaCarloDBApp\PapaCarloDBApp.csproj">
+      <Project>{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}</Project>
+      <Name>PapaCarloDBApp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
