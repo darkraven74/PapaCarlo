@@ -21,7 +21,7 @@ namespace PapaCarlo
             buttonGoodsList.Text = Properties.Resources.Goods;
             buttonContractorsList.Text = Properties.Resources.Contractors;
             buttonCardsList.Text = Properties.Resources.Cards;
-            buttonSupplyContracts.Text = Properties.Resources.SupplyContracts;
+           // buttonSupplyContracts.Text = Properties.Resources.SupplyContracts;
             buttonSupplyList.Text = Properties.Resources.Supplies;
             buttonMovementsList.Text = Properties.Resources.Movements;
             buttonShipmentsList.Text = Properties.Resources.Shipments;

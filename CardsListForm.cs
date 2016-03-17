@@ -7,19 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PapaCarloDBApp;
 
 namespace PapaCarlo
 {
     public partial class CardsListForm : Form
     {
+        QueryTechnologicalCards query;
+
+        DataGridViewCell cel0;
+        DataGridViewCell cel1;
+        DataGridViewCell cel2;
+        DataGridViewCell cel3;
+        DataGridViewCell cel4;
+        DataGridViewRow row;
+
         public CardsListForm()
         {
             InitializeComponent();
+
+            query = new QueryTechnologicalCards();
+
             this.Text = Properties.Resources.Cards;
 
             labelSearch.Text = Properties.Resources.Search;
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
+            button1.Text = Properties.Resources.Delete;
+            button2.Text = Properties.Resources.Refresh;
 
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -31,48 +46,69 @@ namespace PapaCarlo
             dataGridView1.ScrollBars = ScrollBars.Both;
 
             DataGridViewTextBoxColumn col0 = new DataGridViewTextBoxColumn();
-            col0.HeaderText = Properties.Resources.Title;
-
+            col0.HeaderText = Properties.Resources.ID; 
+            
             DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
-            col1.HeaderText = Properties.Resources.InputGoods;
+            col1.HeaderText = Properties.Resources.Title;
 
             DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
-            col2.HeaderText = Properties.Resources.OutputGoods;
+            col2.HeaderText = Properties.Resources.InputGoods;
 
             DataGridViewTextBoxColumn col3 = new DataGridViewTextBoxColumn();
-            col3.HeaderText = Properties.Resources.ID;
+            col3.HeaderText = Properties.Resources.OutputGoods;
 
+            DataGridViewTextBoxColumn col4 = new DataGridViewTextBoxColumn();
+            col4.HeaderText = Properties.Resources.Date;
 
+    
             dataGridView1.Columns.Add(col0);
             dataGridView1.Columns.Add(col1);
             dataGridView1.Columns.Add(col2);
             dataGridView1.Columns.Add(col3);
+            dataGridView1.Columns.Add(col4);
 
-            DataGridViewCell cel0 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel1 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel2 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel3 = new DataGridViewTextBoxCell();
-            DataGridViewRow row = new DataGridViewRow();
-            cel0.Value = "Стул эконом (жесткий)";
-            cel1.Value = "2 Брус, 4 Саморез";
-            cel2.Value = "1 Стул эконом";
-            cel3.Value = "1";
-            row.Cells.AddRange(cel0, cel1, cel2, cel3);
-            dataGridView1.Rows.Add(row);
+            addGridView(query.querySelectTechCards());
+         
 
+        }
 
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            cel2 = new DataGridViewTextBoxCell();
-            cel3 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "Табурет";
-            cel1.Value = "1 Брус, 1 Клей";
-            cel2.Value = "1 Табурет";
-            cel3.Value = "2";
-            row.Cells.AddRange(cel0, cel1, cel2, cel3);
-            dataGridView1.Rows.Add(row);
+        private void addGridView(List<TechnologicalCard> et)
+        {
+            dataGridView1.Rows.Clear();
+            foreach (var item in et)
+            {
+                cel0 = new DataGridViewTextBoxCell();
+                cel1 = new DataGridViewTextBoxCell();
+                cel2 = new DataGridViewTextBoxCell();
+                cel3 = new DataGridViewTextBoxCell();
+                cel4 = new DataGridViewTextBoxCell();
+                row = new DataGridViewRow();
 
+                cel1.Value = item.Title;
+                string s1 = "", s2 = "";
+                List<ProductAmountTable> listWithAmountProducts = query.querySelectTechCardProducts(item.Id);
+
+                if (listWithAmountProducts.Count > 0)
+                {
+                    foreach (var item2 in listWithAmountProducts)
+                    {
+                        if (item2.type == 1)
+                        {
+                            s1 += item2.product.Name + " " + item2.amount + "; ";
+                        }
+                        else
+                        {
+                            s2 += item2.product.Name + " " + item2.amount + "; ";
+                        }
+                    }
+                    cel2.Value = s1.Substring(0, s1.Length - 2);
+                    cel3.Value = s2.Substring(0, s2.Length - 2);
+                }
+                cel0.Value = item.Id;
+                cel4.Value = item.Date;
+                row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4);
+                dataGridView1.Rows.Add(row);
+            }
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -83,8 +119,24 @@ namespace PapaCarlo
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            CardEditForm f = new CardEditForm();
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+
+            int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value;
+
+            CardEditForm f = new CardEditForm(Id);
             f.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+            MessageBox.Show(query.queryDeleteTechCard((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            addGridView(query.querySelectTechCards());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            addGridView(query.querySelectTechCards());
         }
     }
 }

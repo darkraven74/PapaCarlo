@@ -300,4 +300,16 @@
   <data name="Predict" xml:space="preserve">
     <value>Прогноз</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Кол-во</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="Received" xml:space="preserve">
+    <value>Получено</value>
+  </data>
 </root>

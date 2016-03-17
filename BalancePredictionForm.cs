@@ -7,23 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PapaCarloDBApp;
 
 namespace PapaCarlo
 {
     public partial class BalancePredictionForm : Form
     {
+        QueryReports query;
+
+        DataGridViewCell cel0;
+        DataGridViewCell cel1;
+        DataGridViewCell cel2;
+        DataGridViewCell cel3;
+        DataGridViewCell cel4;
+        DataGridViewRow row;
+
         public BalancePredictionForm()
         {
             InitializeComponent();
+
+            query = new QueryReports();
+
             this.Text = Properties.Resources.Predict;
 
             labelDate.Text = Properties.Resources.Date;
             labelStorage.Text = Properties.Resources.Storage;
             labelCell.Text = Properties.Resources.SupplyContract;
             labelGood.Text = Properties.Resources.Good;
-            labelAggregate.Text = Properties.Resources.Aggregate;
-            radioButton1.Text = Properties.Resources.Storage;
-            radioButton2.Text = Properties.Resources.Good;
+            checkBox1.Text = Properties.Resources.All;
 
 
 
@@ -57,48 +68,51 @@ namespace PapaCarlo
             dataGridView1.Columns.Add(col3);
             dataGridView1.Columns.Add(col4);
 
+            addGridView(query.querySelectReportPredict());
+          
+        }
 
-            DataGridViewCell cel0 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel1 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel2 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel3 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel4 = new DataGridViewTextBoxCell();
-            DataGridViewRow row = new DataGridViewRow();
-            cel0.Value = "01";
-            cel1.Value = "Склад 1";
-            cel2.Value = "Шкаф";
-            cel3.Value = "3";
-            cel4.Value = "5";
-            row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4);
-            dataGridView1.Rows.Add(row);
+        private void addGridView(List<ReportPredictTable> et)
+        {
+            dataGridView1.Rows.Clear();
+            foreach (var item in et)
+            {
+                cel0 = new DataGridViewTextBoxCell();
+                cel1 = new DataGridViewTextBoxCell();
+                cel2 = new DataGridViewTextBoxCell();
+                cel3 = new DataGridViewTextBoxCell();
+                cel4 = new DataGridViewTextBoxCell();
+                row = new DataGridViewRow();
 
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            cel2 = new DataGridViewTextBoxCell();
-            cel3 = new DataGridViewTextBoxCell();
-            cel4 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "02";
-            cel1.Value = "Склад 1";
-            cel2.Value = "Стол";
-            cel3.Value = "1";
-            cel4.Value = "2";
-            row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4);
-            dataGridView1.Rows.Add(row);
+                cel0.Value = item.reportPredict.ContractSupplyId;
+                cel1.Value = item.storehouse.Name;
+                cel2.Value = item.product.Name;
+                cel3.Value = item.reportPredict.Amount;
+                cel4.Value = item.reportPredict.Predict;
 
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            cel2 = new DataGridViewTextBoxCell();
-            cel3 = new DataGridViewTextBoxCell();
-            cel4 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "06";
-            cel1.Value = "Склад 2";
-            cel2.Value = "Стул";
-            cel3.Value = "2";
-            cel4.Value = "4";
-            row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4);
-            dataGridView1.Rows.Add(row);
+                row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4);
+                dataGridView1.Rows.Add(row);
+            }
+        }
+
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            addGridView(query.querySelectReportPredict(dateTimePicker1.Value.Date));
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                dateTimePicker1.Enabled = false;
+                addGridView(query.querySelectReportPredict());
+            }
+            else
+            {
+                dateTimePicker1.Enabled = true;
+                addGridView(query.querySelectReportPredict(dateTimePicker1.Value.Date));
+            }
         }
     }
 }

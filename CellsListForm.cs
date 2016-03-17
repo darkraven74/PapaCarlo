@@ -7,23 +7,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
+using PapaCarloDBApp;
 
 namespace PapaCarlo
 {
     public partial class CellsListForm : Form
     {
+        QueryStore query;
+
+        DataGridViewCell cel0;
+        DataGridViewCell cel1;
+        DataGridViewCell cel2;
+        DataGridViewRow row;
+
         public CellsListForm()
         {
             InitializeComponent();
+
+            query = new QueryStore();
+
             this.Text = Properties.Resources.Cells;
 
             labelSearch.Text = Properties.Resources.Search;
             labelStorage.Text = Properties.Resources.Storage;
-            comboBoxStorages.DataSource = new List<String> { Properties.Resources.All,
-                "Склад 1", "Главный склад", "Склад в Пулково" };
+           
+
+            ArrayList lObj = new ArrayList();
+
+            lObj.Add(new { Id = 0, StorehouseName = Properties.Resources.All });
+            foreach (var item in query.querySelectStorehouses())
+            {
+                lObj.Add(new { Id = item.Id, StorehouseName = item.Name });
+            }
+
+            comboBoxStorages.DataSource = lObj;
+
+            comboBoxStorages.ValueMember = "Id";
+            comboBoxStorages.DisplayMember = "StorehouseName";
+
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
-
+            button1.Text = Properties.Resources.Delete;
+            button2.Text = Properties.Resources.Refresh;
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
@@ -33,53 +59,39 @@ namespace PapaCarlo
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Both;
 
-            DataGridViewTextBoxColumn col0 = new DataGridViewTextBoxColumn();
-            col0.HeaderText = Properties.Resources.Storage;
+            DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
+            col2.HeaderText = Properties.Resources.Storage;
 
             DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
             col1.HeaderText = Properties.Resources.Description;
 
-            DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
-            col2.HeaderText = Properties.Resources.ID;
-
+            DataGridViewTextBoxColumn col0 = new DataGridViewTextBoxColumn();
+            col0.HeaderText = Properties.Resources.ID;
 
             dataGridView1.Columns.Add(col0);
             dataGridView1.Columns.Add(col1);
             dataGridView1.Columns.Add(col2);
 
+            addGridView(query.querySelectStoreCells(0));
+        }
 
+        private void addGridView(List<StoreCellTable> et)
+        {
+            dataGridView1.Rows.Clear();
+            foreach (var item in et)
+            {
+                cel0 = new DataGridViewTextBoxCell();
+                cel1 = new DataGridViewTextBoxCell();
+                cel2 = new DataGridViewTextBoxCell();
+                row = new DataGridViewRow();
 
-            DataGridViewCell cel0 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel1 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel2 = new DataGridViewTextBoxCell();
-            DataGridViewRow row = new DataGridViewRow();
-            cel0.Value = "Склад 1";
-            cel1.Value = "ячейка для стали";
-            cel2.Value = "03";
-            row.Cells.AddRange(cel0, cel1, cel2);
-            dataGridView1.Rows.Add(row);
+                cel2.Value = item.storehouse.Name;
+                cel1.Value = item.storeCell.Description;
+                cel0.Value = item.storeCell.Id;
 
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            cel2 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "Главный склад";
-            cel1.Value = "ячейка в углу";
-            cel2.Value = "2";
-            row.Cells.AddRange(cel0, cel1, cel2);
-            dataGridView1.Rows.Add(row);
-
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            cel2 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "Склад в Пулково";
-            cel1.Value = "ячейка для всего";
-            cel2.Value = "5";
-            row.Cells.AddRange(cel0, cel1, cel2);
-            dataGridView1.Rows.Add(row);
-
-
+                row.Cells.AddRange(cel0, cel1, cel2);
+                dataGridView1.Rows.Add(row);
+            }
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -90,7 +102,10 @@ namespace PapaCarlo
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            CellEditForm f = new CellEditForm();
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+
+            int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
+            CellEditForm f = new CellEditForm(Id);
             f.ShowDialog();
         }
 
@@ -101,7 +116,7 @@ namespace PapaCarlo
 
         private void comboBoxStorages_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            addGridView(query.querySelectStoreCells((int)comboBoxStorages.SelectedValue));
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -117,6 +132,18 @@ namespace PapaCarlo
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+            MessageBox.Show(query.queryDeleteStoreCell((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            addGridView(query.querySelectStoreCells(0));
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            addGridView(query.querySelectStoreCells(0));
         }
     }
 }

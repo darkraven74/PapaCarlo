@@ -7,14 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PapaCarloDBApp;
 
 namespace PapaCarlo
 {
     public partial class StorageEditForm : Form
     {
+        QueryStore query;
+
+         int Id = -1;
+
+         public StorageEditForm(int Id)
+             : this()
+        {
+            this.Id = Id;
+            addDataForUpdate();
+        }
+
         public StorageEditForm()
         {
             InitializeComponent();
+
+            query = new QueryStore();
+
             this.Text = Properties.Resources.Storage; 
             label1.Text = Properties.Resources.Title;
             label2.Text = Properties.Resources.Address;
@@ -27,10 +42,6 @@ namespace PapaCarlo
             this.Dispose();
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
 
         private void label8_Click(object sender, EventArgs e)
         {
@@ -107,9 +118,31 @@ namespace PapaCarlo
             this.Dispose();
         }
 
-        private void buttonOK_Click_1(object sender, EventArgs e)
+        private void buttonOK_Click(object sender, EventArgs e)
         {
+            Storehouse c = new Storehouse();
+            c.Name = textBox1.Text;
+            c.Address = textBox2.Text;
+
+            if (Id == -1)
+            {
+                MessageBox.Show(query.queryAddStorehouse(c) + "");
+            }
+            else
+            {
+                c.Id = Id;
+                MessageBox.Show(query.queryUpdateStorehouse(c) + "");
+            }
             this.Dispose();
+        }
+
+        private void addDataForUpdate()
+        {
+            Storehouse c = query.queryFindStorehouseById(Id);
+            if (c == null) return;
+
+            textBox1.Text = c.Name;
+            textBox2.Text = c.Address;
         }
     }
 }

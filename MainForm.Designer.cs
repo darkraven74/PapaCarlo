@@ -34,7 +34,6 @@
             this.buttonGoodsList = new System.Windows.Forms.Button();
             this.buttonContractorsList = new System.Windows.Forms.Button();
             this.buttonCardsList = new System.Windows.Forms.Button();
-            this.buttonSupplyContracts = new System.Windows.Forms.Button();
             this.buttonSupplyList = new System.Windows.Forms.Button();
             this.buttonMovementsList = new System.Windows.Forms.Button();
             this.buttonShipmentsList = new System.Windows.Forms.Button();
@@ -103,19 +102,9 @@
             this.buttonCardsList.UseVisualStyleBackColor = true;
             this.buttonCardsList.Click += new System.EventHandler(this.button1_Click);
             // 
-            // buttonSupplyContracts
-            // 
-            this.buttonSupplyContracts.Location = new System.Drawing.Point(121, 13);
-            this.buttonSupplyContracts.Name = "buttonSupplyContracts";
-            this.buttonSupplyContracts.Size = new System.Drawing.Size(127, 23);
-            this.buttonSupplyContracts.TabIndex = 6;
-            this.buttonSupplyContracts.Text = "button6";
-            this.buttonSupplyContracts.UseVisualStyleBackColor = true;
-            this.buttonSupplyContracts.Click += new System.EventHandler(this.buttonSupplyContracts_Click);
-            // 
             // buttonSupplyList
             // 
-            this.buttonSupplyList.Location = new System.Drawing.Point(121, 42);
+            this.buttonSupplyList.Location = new System.Drawing.Point(121, 15);
             this.buttonSupplyList.Name = "buttonSupplyList";
             this.buttonSupplyList.Size = new System.Drawing.Size(127, 23);
             this.buttonSupplyList.TabIndex = 7;
@@ -125,7 +114,7 @@
             // 
             // buttonMovementsList
             // 
-            this.buttonMovementsList.Location = new System.Drawing.Point(121, 71);
+            this.buttonMovementsList.Location = new System.Drawing.Point(121, 44);
             this.buttonMovementsList.Name = "buttonMovementsList";
             this.buttonMovementsList.Size = new System.Drawing.Size(127, 23);
             this.buttonMovementsList.TabIndex = 8;
@@ -135,7 +124,7 @@
             // 
             // buttonShipmentsList
             // 
-            this.buttonShipmentsList.Location = new System.Drawing.Point(121, 101);
+            this.buttonShipmentsList.Location = new System.Drawing.Point(121, 74);
             this.buttonShipmentsList.Name = "buttonShipmentsList";
             this.buttonShipmentsList.Size = new System.Drawing.Size(127, 23);
             this.buttonShipmentsList.TabIndex = 9;
@@ -145,7 +134,7 @@
             // 
             // buttonOperationsList
             // 
-            this.buttonOperationsList.Location = new System.Drawing.Point(121, 130);
+            this.buttonOperationsList.Location = new System.Drawing.Point(121, 103);
             this.buttonOperationsList.Name = "buttonOperationsList";
             this.buttonOperationsList.Size = new System.Drawing.Size(127, 23);
             this.buttonOperationsList.TabIndex = 10;
@@ -155,7 +144,7 @@
             // 
             // buttonBalance
             // 
-            this.buttonBalance.Location = new System.Drawing.Point(121, 159);
+            this.buttonBalance.Location = new System.Drawing.Point(121, 132);
             this.buttonBalance.Name = "buttonBalance";
             this.buttonBalance.Size = new System.Drawing.Size(127, 23);
             this.buttonBalance.TabIndex = 11;
@@ -165,7 +154,7 @@
             // 
             // buttonPrediction
             // 
-            this.buttonPrediction.Location = new System.Drawing.Point(121, 188);
+            this.buttonPrediction.Location = new System.Drawing.Point(121, 161);
             this.buttonPrediction.Name = "buttonPrediction";
             this.buttonPrediction.Size = new System.Drawing.Size(127, 23);
             this.buttonPrediction.TabIndex = 12;
@@ -184,7 +173,6 @@
             this.Controls.Add(this.buttonShipmentsList);
             this.Controls.Add(this.buttonMovementsList);
             this.Controls.Add(this.buttonSupplyList);
-            this.Controls.Add(this.buttonSupplyContracts);
             this.Controls.Add(this.buttonCardsList);
             this.Controls.Add(this.buttonContractorsList);
             this.Controls.Add(this.buttonGoodsList);
@@ -206,7 +194,6 @@
         private System.Windows.Forms.Button buttonGoodsList;
         private System.Windows.Forms.Button buttonContractorsList;
         private System.Windows.Forms.Button buttonCardsList;
-        private System.Windows.Forms.Button buttonSupplyContracts;
         private System.Windows.Forms.Button buttonSupplyList;
         private System.Windows.Forms.Button buttonMovementsList;
         private System.Windows.Forms.Button buttonShipmentsList;

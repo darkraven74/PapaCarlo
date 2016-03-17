@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PapaCarloDBApp;
 
 namespace PapaCarlo
 {
@@ -19,8 +20,8 @@ namespace PapaCarlo
             labelLogin.Text = Properties.Resources.Login;
             labelPassword.Text = Properties.Resources.Password;
             labelGroup.Text = Properties.Resources.Group;
-            textBoxLogin.Text = "login";
-            textBoxPassword.Text = "password";
+            textBoxLogin.Text = "user";
+            textBoxPassword.Text = "1234";
             textBoxPassword.UseSystemPasswordChar = true;
             buttonEnter.Text = Properties.Resources.Enter;
             comboBox1.DataSource = new List<String> { Properties.Resources.Storekeeper,
@@ -34,7 +35,12 @@ namespace PapaCarlo
 
         private void buttonEnter_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            QueryEmployee pr = new QueryEmployee();
+            int count = pr.queryGetUserByCredentials(textBoxLogin.Text, textBoxPassword.Text);
+            if (count==1)
+            {
+                this.Dispose();
+            }
         }
     }
 }

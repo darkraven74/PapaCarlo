@@ -7,14 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PapaCarloDBApp;
 
 namespace PapaCarlo
 {
     public partial class OperationsListForm : Form
     {
+        QueryContractTechOperations query;
+
+        DataGridViewCell cel0;
+        DataGridViewCell cel1;
+        DataGridViewCell cel2;
+        DataGridViewCell cel3;
+        DataGridViewRow row;
+
         public OperationsListForm()
         {
             InitializeComponent();
+
+            query = new QueryContractTechOperations();
 
             this.Text = Properties.Resources.Operations;
 
@@ -22,7 +33,9 @@ namespace PapaCarlo
             labelDate.Text = Properties.Resources.Date;
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
-
+            checkBox1.Text = Properties.Resources.All;
+            button1.Text = Properties.Resources.Delete;
+            button2.Text = Properties.Resources.Refresh;
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
@@ -45,37 +58,34 @@ namespace PapaCarlo
             col3.HeaderText = Properties.Resources.Count;
 
 
-
-
             dataGridView1.Columns.Add(col0);
             dataGridView1.Columns.Add(col1);
             dataGridView1.Columns.Add(col2);
             dataGridView1.Columns.Add(col3);
 
+            addGridView(query.querySelectOperations());
 
-            DataGridViewCell cel0 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel1 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel2 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel3 = new DataGridViewTextBoxCell();
-            DataGridViewRow row = new DataGridViewRow();
-            cel0.Value = "001";
-            cel1.Value = "02.01.2016";
-            cel2.Value = "003";
-            cel3.Value = "01";
-            row.Cells.AddRange(cel0, cel1, cel2, cel3);
-            dataGridView1.Rows.Add(row);
+        }
 
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            cel2 = new DataGridViewTextBoxCell();
-            cel3 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "002";
-            cel1.Value = "05.07.2016";
-            cel2.Value = "004";
-            cel3.Value = "02";
-            row.Cells.AddRange(cel0, cel1, cel2, cel3);
-            dataGridView1.Rows.Add(row);
+        private void addGridView(List<ContractTechOperation> et)
+        {
+            dataGridView1.Rows.Clear();
+            foreach (var item in et)
+            {
+                cel0 = new DataGridViewTextBoxCell();
+                cel1 = new DataGridViewTextBoxCell();
+                cel2 = new DataGridViewTextBoxCell();
+                cel3 = new DataGridViewTextBoxCell();
+                row = new DataGridViewRow();
+
+                cel0.Value = item.Id;
+                cel1.Value = item.Date;
+                cel2.Value = item.TechCardId;
+                cel3.Value = item.Amount;
+
+                row.Cells.AddRange(cel0, cel1, cel2, cel3);
+                dataGridView1.Rows.Add(row);
+            }
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -86,8 +96,38 @@ namespace PapaCarlo
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            OperationEditForm f = new OperationEditForm();
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+            int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
+            OperationEditForm f = new OperationEditForm(Id);
             f.ShowDialog();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                dateTimePicker1.Enabled = false;
+                addGridView(query.querySelectOperations());
+            }
+            else
+            {
+                dateTimePicker1.Enabled = true;
+                addGridView(query.querySelectOperations(dateTimePicker1.Value.Date));
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+            MessageBox.Show(query.queryDeleteContractTechOperation((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            addGridView(query.querySelectOperations());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            addGridView(query.querySelectOperations());
+            dateTimePicker1.Enabled = false;
+            checkBox1.Checked = true;
         }
     }
 }

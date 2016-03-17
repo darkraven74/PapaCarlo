@@ -7,22 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PapaCarloDBApp;
 
 namespace PapaCarlo
 {
     public partial class ContractorsListForm : Form
     {
+        QueryContractors query;
+
+        DataGridViewCell cel00;
+        DataGridViewCell cel0;
+        DataGridViewCell cel1;
+        DataGridViewRow row;
+
         public ContractorsListForm()
         {
             InitializeComponent();
+
+            query= new QueryContractors();
+
             this.Text = Properties.Resources.Contractors;
 
             labelSearch.Text = Properties.Resources.Search;
             labelContractorType.Text = Properties.Resources.ContractorType;
             comboBoxContractorType.DataSource = new List<String> { Properties.Resources.All,
-                Properties.Resources.Provider, Properties.Resources.Customer };
+                Properties.Resources.Customer, Properties.Resources.Provider };
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
+            button1.Text = Properties.Resources.Delete;
+            button2.Text = Properties.Resources.Refresh;
 
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -33,6 +46,9 @@ namespace PapaCarlo
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Both;
 
+            DataGridViewTextBoxColumn col00 = new DataGridViewTextBoxColumn();
+            col00.HeaderText = Properties.Resources.ID;
+            
             DataGridViewTextBoxColumn col0 = new DataGridViewTextBoxColumn();
             col0.HeaderText = Properties.Resources.Title;
 
@@ -40,33 +56,38 @@ namespace PapaCarlo
             col1.HeaderText = Properties.Resources.ContractorType;
 
 
+            dataGridView1.Columns.Add(col00);
             dataGridView1.Columns.Add(col0);
             dataGridView1.Columns.Add(col1);
 
+            addGridView(query.querySelectContractors(0));
+        }
 
-            DataGridViewCell cel0 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel1 = new DataGridViewTextBoxCell();
-            DataGridViewRow row = new DataGridViewRow();
-            cel0.Value = "ООО Светлана";
-            cel1.Value = Properties.Resources.Customer;
-            row.Cells.AddRange(cel0, cel1);
-            dataGridView1.Rows.Add(row);
+        private void addGridView(List<Contractor> et)
+        {
+            dataGridView1.Rows.Clear();
+            foreach (var item in et)
+            {
+                cel00 = new DataGridViewTextBoxCell();
+                cel0 = new DataGridViewTextBoxCell();
+                cel1 = new DataGridViewTextBoxCell();
+                row = new DataGridViewRow();
 
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "ИП Бобров";
-            cel1.Value = Properties.Resources.Provider;
-            row.Cells.AddRange(cel0, cel1);
-            dataGridView1.Rows.Add(row);
+                cel00.Value = item.Id;
+                cel0.Value = item.Name;
 
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "Компания деньга";
-            cel1.Value = Properties.Resources.Customer;
-            row.Cells.AddRange(cel0, cel1);
-            dataGridView1.Rows.Add(row);
+                if (item.Type == 1)
+                {
+                    cel1.Value = Properties.Resources.Customer;
+                }
+                else
+                {
+                    cel1.Value = Properties.Resources.Provider;
+                }
+
+                row.Cells.AddRange(cel00, cel0, cel1);
+                dataGridView1.Rows.Add(row);
+            }
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -77,8 +98,29 @@ namespace PapaCarlo
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            ContractorEditForm f = new ContractorEditForm();
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+
+            int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
+            ContractorEditForm f = new ContractorEditForm(Id);
             f.ShowDialog();
+        }
+
+        private void comboBoxContractorType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            addGridView(query.querySelectContractors(comboBoxContractorType.SelectedIndex));
+           // MessageBox.Show(comboBoxContractorType.SelectedIndex+"");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+            MessageBox.Show(query.queryDeleteContractor((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            addGridView(query.querySelectContractors(0));
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            addGridView(query.querySelectContractors(0));
         }
     }
 }

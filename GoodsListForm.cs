@@ -7,23 +7,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PapaCarloDBApp;
+using System.Collections;
 
 namespace PapaCarlo
 {
     public partial class GoodsListForm : Form
     {
+        QueryProducts query;
+
+        DataGridViewCell cel0;
+        DataGridViewCell cel1;
+        DataGridViewCell cel2;
+        DataGridViewCell cel3;
+        DataGridViewCell cel4;
+        DataGridViewRow row;
+
         public GoodsListForm()
         {
             InitializeComponent();
+
+            query = new QueryProducts();
+
             this.Text = Properties.Resources.Goods;
 
             labelSearch.Text = Properties.Resources.Search;
             labelColor.Text = Properties.Resources.Color;
-            comboBoxColors.DataSource = new List<String> { Properties.Resources.All,
-                "Бук", "Вишня", "Белый" };
+            ArrayList lObj = new ArrayList();
+
+            lObj.Add(Properties.Resources.All);
+            foreach (string item in query.querySelectAllColors())
+            {
+                lObj.Add(item);
+            }
+            comboBoxColors.DataSource = lObj;
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
-
+            button1.Text = Properties.Resources.Delete;
+            button2.Text = Properties.Resources.Refresh;
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
@@ -34,10 +55,10 @@ namespace PapaCarlo
             dataGridView1.ScrollBars = ScrollBars.Both;
 
             DataGridViewTextBoxColumn col0 = new DataGridViewTextBoxColumn();
-            col0.HeaderText = Properties.Resources.Title;
-
+            col0.HeaderText = Properties.Resources.ID;
+            
             DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
-            col1.HeaderText = Properties.Resources.ID;
+            col1.HeaderText = Properties.Resources.Title;
 
             DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
             col2.HeaderText = Properties.Resources.VendorCode;
@@ -54,48 +75,30 @@ namespace PapaCarlo
             dataGridView1.Columns.Add(col3);
             dataGridView1.Columns.Add(col4);
 
+            addGridView(query.querySelectProducts());
+        }
 
-            DataGridViewCell cel0 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel1 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel2 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel3 = new DataGridViewTextBoxCell();
-            DataGridViewCell cel4 = new DataGridViewTextBoxCell();
-            DataGridViewRow row = new DataGridViewRow();
-            cel0.Value = "Стул";
-            cel1.Value = "001";
-            cel2.Value = "00001";
-            cel3.Value = "высокий";
-            cel4.Value = "Белый";
-            row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4);
-            dataGridView1.Rows.Add(row);
+        private void addGridView(List<Product> et)
+        {
+            dataGridView1.Rows.Clear();
+            foreach (var item in et)
+            {
+                cel0 = new DataGridViewTextBoxCell();
+                cel1 = new DataGridViewTextBoxCell();
+                cel2 = new DataGridViewTextBoxCell();
+                cel3 = new DataGridViewTextBoxCell();
+                cel4 = new DataGridViewTextBoxCell();
+                row = new DataGridViewRow();
 
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            cel2 = new DataGridViewTextBoxCell();
-            cel3 = new DataGridViewTextBoxCell();
-            cel4 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "Стол";
-            cel1.Value = "003";
-            cel2.Value = "00002";
-            cel3.Value = "на 5 персон";
-            cel4.Value = "Белый";
-            row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4);
-            dataGridView1.Rows.Add(row);
+                cel0.Value = item.Id;
+                cel1.Value = item.Name;
+                cel2.Value = item.VendorCode;
+                cel3.Value = item.Description;
+                cel4.Value = item.Color;
 
-            cel0 = new DataGridViewTextBoxCell();
-            cel1 = new DataGridViewTextBoxCell();
-            cel2 = new DataGridViewTextBoxCell();
-            cel3 = new DataGridViewTextBoxCell();
-            cel4 = new DataGridViewTextBoxCell();
-            row = new DataGridViewRow();
-            cel0.Value = "Брус";
-            cel1.Value = "002";
-            cel2.Value = "00032";
-            cel3.Value = "34х46";
-            cel4.Value = "Вишня";
-            row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4);
-            dataGridView1.Rows.Add(row);
+                row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4);
+                dataGridView1.Rows.Add(row);
+            }
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -106,8 +109,34 @@ namespace PapaCarlo
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            GoodEditForm f = new GoodEditForm();
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+            int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
+            GoodEditForm f = new GoodEditForm(Id);
             f.ShowDialog();
+        }
+
+        private void comboBoxColors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!comboBoxColors.SelectedValue.Equals(Properties.Resources.All))
+            {
+                addGridView(query.querySelectProducts((string)comboBoxColors.SelectedValue));
+            }
+            else
+            {
+                addGridView(query.querySelectProducts());
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
+            MessageBox.Show(query.queryDeleteProduct((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            addGridView(query.querySelectProducts());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            addGridView(query.querySelectProducts());
         }
     }
 }

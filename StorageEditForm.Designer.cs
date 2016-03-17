@@ -38,17 +38,17 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(166, 58);
+            this.buttonOK.Location = new System.Drawing.Point(85, 58);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 39;
             this.buttonOK.Text = "button2";
             this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click_1);
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(85, 58);
+            this.buttonCancel.Location = new System.Drawing.Point(166, 58);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 38;
