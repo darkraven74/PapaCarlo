@@ -31,20 +31,9 @@ namespace PapaCarlo
 
             labelSearch.Text = Properties.Resources.Search;
             labelStorage.Text = Properties.Resources.Storage;
+
+
            
-
-            ArrayList lObj = new ArrayList();
-
-            lObj.Add(new { Id = 0, StorehouseName = Properties.Resources.All });
-            foreach (var item in query.querySelectStorehouses())
-            {
-                lObj.Add(new { Id = item.Id, StorehouseName = item.Name });
-            }
-
-            comboBoxStorages.DataSource = lObj;
-
-            comboBoxStorages.ValueMember = "Id";
-            comboBoxStorages.DisplayMember = "StorehouseName";
 
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
@@ -73,11 +62,25 @@ namespace PapaCarlo
             dataGridView1.Columns.Add(col2);
 
             addGridView(query.querySelectStoreCells(0));
+
+            List<ObjectComboBox> lObj = new List<ObjectComboBox>();
+
+            lObj.Add(new ObjectComboBox(0, Properties.Resources.All));
+            foreach (var item in query.querySelectStorehouses())
+            {
+                lObj.Add(new ObjectComboBox(item.Id, item.Name));
+            }
+
+            comboBoxStorages.DataSource = lObj;
+
+            comboBoxStorages.ValueMember = "Id";
+            comboBoxStorages.DisplayMember = "Name";
         }
 
         private void addGridView(List<StoreCellTable> et)
         {
             dataGridView1.Rows.Clear();
+            DataTable table = new DataTable();
             foreach (var item in et)
             {
                 cel0 = new DataGridViewTextBoxCell();
@@ -116,7 +119,10 @@ namespace PapaCarlo
 
         private void comboBoxStorages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            addGridView(query.querySelectStoreCells((int)comboBoxStorages.SelectedValue));
+            ObjectComboBox obj = (ObjectComboBox)comboBoxStorages.SelectedItem;
+            List<StoreCellTable> list = query.querySelectStoreCells(obj.Id);
+            addGridView(list);
+           
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -144,6 +150,11 @@ namespace PapaCarlo
         private void button2_Click(object sender, EventArgs e)
         {
             addGridView(query.querySelectStoreCells(0));
+        }
+
+        private void CellsListForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

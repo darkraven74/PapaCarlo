@@ -9,102 +9,131 @@ namespace PapaCarloDBApp
     {
         public List<Product> querySelectProducts()
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                var query = from product in db.Products
-                            select product;
-                return query.ToList();
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from product in db.Products
+                                select product;
+                    return query.ToList();
 
+                }
             }
+            return null;
         }
 
         public List<string> querySelectAllColors()
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
             {
-                var query = from product in db.Products
-                            select product.Color;
-                return query.Distinct().ToList();
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from product in db.Products
+                                select product.Color;
+                    return query.Distinct().ToList();
+                }
             }
+            return null;
         }
 
         public List<Product> querySelectProducts(string color)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3) 
             {
-                var query = from product in db.Products
-                            where product.Color.Equals(color)
-                            select product;
-                return query.ToList();
 
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from product in db.Products
+                                where product.Color.Equals(color)
+                                select product;
+                    return query.ToList();
+
+                }
             }
+            return null;
         }
 
         public bool queryAddProduct(Product c)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    db.Products.Add(c);
-                    db.SaveChanges();
+                    try
+                    {
+                        db.Products.Add(c);
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
         }
 
         public bool queryUpdateProduct(Product c)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    Product p = db.Products.Find(c.Id);
+                    try
+                    {
+                        Product p = db.Products.Find(c.Id);
 
-                    p.Name = c.Name;
-                    p.VendorCode = c.VendorCode;
-                    p.Color = c.Color;
-                    p.Description = c.Description;
+                        p.Name = c.Name;
+                        p.VendorCode = c.VendorCode;
+                        p.Color = c.Color;
+                        p.Description = c.Description;
 
-                    db.SaveChanges();
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
         }
 
         public bool queryDeleteProduct(int Id)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    Product p = db.Products.Find(Id);
-                    db.Products.Remove(p);
+                    try
+                    {
+                        Product p = db.Products.Find(Id);
+                        db.Products.Remove(p);
 
-                    db.SaveChanges();
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
         }
 
         public Product queryFindProductById(int Id)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                return db.Products.Find(Id);
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    return db.Products.Find(Id);
+                }
             }
+            return null;
         }
     }
 }

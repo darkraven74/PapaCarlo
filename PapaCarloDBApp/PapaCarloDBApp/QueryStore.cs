@@ -9,169 +9,209 @@ namespace PapaCarloDBApp
     {
         public List<Storehouse> querySelectStorehouses()
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                var query = from storehouse in db.Storehouses
-                            select storehouse;
-                return query.ToList();
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from storehouse in db.Storehouses
+                                select storehouse;
+                    return query.ToList();
 
+                }
             }
+            return null;
         }
 
         public List<StoreCellTable> querySelectStoreCells(int storehouseId)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                var query = from storecell in db.StoreCells
-                            join storehouse in db.Storehouses on storecell.StorehouseId equals storehouse.Id 
-                                select new { storehouse, storecell };
-                
-                if (storehouseId > 0)
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    query = from storecell in db.StoreCells
-                            join storehouse in db.Storehouses on storecell.StorehouseId equals storehouse.Id 
+                    var query = from storecell in db.StoreCells
+                                join storehouse in db.Storehouses on storecell.StorehouseId equals storehouse.Id
+                                select new { storehouse, storecell };
+
+                    if (storehouseId > 0)
+                    {
+                        query = from storecell in db.StoreCells
+                                join storehouse in db.Storehouses on storecell.StorehouseId equals storehouse.Id
                                 where storecell.StorehouseId == storehouseId
                                 select new { storehouse, storecell };
-                }
-                List<StoreCellTable> table = new List<StoreCellTable>();
+                    }
+                    List<StoreCellTable> table = new List<StoreCellTable>();
 
-                foreach (var item in query)
-                {
-                    table.Add(new StoreCellTable(item.storecell, item.storehouse));
-                }
-                return table;
+                    foreach (var item in query)
+                    {
+                        table.Add(new StoreCellTable(item.storecell, item.storehouse));
+                    }
+                    return table;
 
+                }
             }
+            return null;
         }
 
         public bool queryAddStoreCell(StoreCell c)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    db.StoreCells.Add(c);
-                    db.SaveChanges();
+                    try
+                    {
+                        db.StoreCells.Add(c);
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
         }
 
         public bool queryUpdateStoreCell(StoreCell c)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    StoreCell p = db.StoreCells.Find(c.Id);
+                    try
+                    {
+                        StoreCell p = db.StoreCells.Find(c.Id);
 
-                    p.Description = c.Description;
-                    p.StorehouseId = c.StorehouseId;
-                    
-                    db.SaveChanges();
+                        p.Description = c.Description;
+                        p.StorehouseId = c.StorehouseId;
+
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
         }
 
         public bool queryDeleteStoreCell(int Id)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    StoreCell p = db.StoreCells.Find(Id);
-                    db.StoreCells.Remove(p);
+                    try
+                    {
+                        StoreCell p = db.StoreCells.Find(Id);
+                        db.StoreCells.Remove(p);
 
-                    db.SaveChanges();
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
         }
 
         public StoreCell queryFindStoreCellById(int Id)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                return db.StoreCells.Find(Id);
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    return db.StoreCells.Find(Id);
+                }
             }
+            return null;
         }
 
         public bool queryAddStorehouse(Storehouse c)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    db.Storehouses.Add(c);
-                    db.SaveChanges();
+                    try
+                    {
+                        db.Storehouses.Add(c);
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
         }
 
         public bool queryUpdateStorehouse(Storehouse c)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    Storehouse p = db.Storehouses.Find(c.Id);
+                    try
+                    {
+                        Storehouse p = db.Storehouses.Find(c.Id);
 
-                    p.Name = c.Name;
-                    p.Address = c.Address;
+                        p.Name = c.Name;
+                        p.Address = c.Address;
 
-                    db.SaveChanges();
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
         }
 
         public bool queryDeleteStorehouse(int Id)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    Storehouse p = db.Storehouses.Find(Id);
-                    db.Storehouses.Remove(p);
+                    try
+                    {
+                        Storehouse p = db.Storehouses.Find(Id);
+                        db.Storehouses.Remove(p);
 
-                    db.SaveChanges();
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
         }
 
         public Storehouse queryFindStorehouseById(int Id)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
-                return db.Storehouses.Find(Id);
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    return db.Storehouses.Find(Id);
+                }
             }
+            return null;
         }
     }
 }

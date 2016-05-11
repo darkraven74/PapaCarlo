@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PapaCarloDBApp;
 using System.Collections;
+using System.Activities;
+using System.Activities.Statements;
+using System.Collections.Generic;
+using System.Activities.Hosting;
 
 namespace PapaCarlo
 {
@@ -19,6 +23,7 @@ namespace PapaCarlo
          QueryProducts queryProd;
 
          int Id = -1;
+         int oldAm = 0;
 
          public MovementEditForm(int Id)
              : this()
@@ -89,7 +94,7 @@ namespace PapaCarlo
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            ContractMove c = new ContractMove();
+           /* ContractMove c = new ContractMove();
             c.StoreCellFromId = (int)comboBox2.SelectedValue;
             c.StoreCellToId = (int)comboBox4.SelectedValue;
 
@@ -97,14 +102,85 @@ namespace PapaCarlo
             c.Amount =Int32.Parse(textBoxAmount.Text);
             
             c.Date = dateTimePicker1.Value.Date;
+            */
+
+            QueryContractShipment q = new QueryContractShipment();
+
+            ContractShipment c = new ContractShipment();
+            c.StoreCellFromId = (int)comboBox2.SelectedValue;
+
+            c.ProductId = (int)comboBox5.SelectedValue;
+            c.Amount = Int32.Parse(textBoxAmount.Text);
+            c.Date = dateTimePicker1.Value.Date;
+
+            int storeId = (int)comboBox1.SelectedValue;
+
+            Dictionary<string, object> arguments = new Dictionary<string, object>();
+            arguments.Add("query", q);
+            arguments.Add("contr", c);
+            arguments.Add("Id", -1);
+            arguments.Add("storeId", storeId);
+            arguments.Add("oldAmount", oldAm);
+            arguments.Add("mov", 1);
+
+
+            IDictionary<string, object> outputs = WorkflowInvoker.Invoke(new Shipment(), arguments);
+
+            Console.WriteLine("status:  {0}", outputs["Result"]);
+            if (!(bool)outputs["Result"])
+            {
+                MessageBox.Show("error");
+                this.Dispose();
+                return;
+            }
+
+
+            //***
+
+            c.StoreCellFromId = (int)comboBox4.SelectedValue;
+
+            c.Amount = -Int32.Parse(textBoxAmount.Text);
+
+            storeId = (int)comboBox3.SelectedValue;
+
+            arguments = new Dictionary<string, object>();
+            arguments.Add("query", q);
+            arguments.Add("contr", c);
+            arguments.Add("Id", -1);
+            arguments.Add("storeId", storeId);
+            arguments.Add("oldAmount", -oldAm);
+            arguments.Add("mov", 1);
+
+
+            outputs = WorkflowInvoker.Invoke(new Shipment(), arguments);
+
+            Console.WriteLine("status:  {0}", outputs["Result"]);
+            if (!(bool)outputs["Result"])
+            {
+                MessageBox.Show("error");
+                this.Dispose();
+                return;
+            }
+
+            ContractMove cm = new ContractMove();
+
+            cm.StoreCellFromId = (int)comboBox2.SelectedValue;
+            cm.StoreCellToId = (int)comboBox4.SelectedValue;
+
+            cm.ProductId = (int)comboBox5.SelectedValue;
+            cm.Amount = Int32.Parse(textBoxAmount.Text);
+
+            cm.Date = dateTimePicker1.Value.Date;
+
+
             if (Id == -1)
             {
-                MessageBox.Show(query.queryAddContractMove(c) + "");
+                MessageBox.Show(query.queryAddContractMove(cm) + "");
             }
             else
             {
-                c.Id = Id;
-                MessageBox.Show(query.queryUpdateContractMove(c) + "");
+                cm.Id = Id;
+                MessageBox.Show(query.queryUpdateContractMove(cm) + "");
             }
             this.Dispose();
         }
@@ -123,13 +199,18 @@ namespace PapaCarlo
             addStorageCells((int)comboBox3.SelectedValue, comboBox4);
             comboBox5.SelectedValue = c.ProductId;
             textBoxAmount.Text = c.Amount+"";
+
+            oldAm = c.Amount;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int storehouseIdSelected = (int)comboBox1.SelectedValue;
-            addStorageCells(storehouseIdSelected, comboBox2);
-          
+            try
+            {
+                int storehouseIdSelected = (int)comboBox1.SelectedValue;
+                addStorageCells(storehouseIdSelected, comboBox2);
+            }
+            catch (Exception ex) { }
         }
 
         private void addStorageCells(int storehouseIdSelected, ComboBox cb)
@@ -148,9 +229,12 @@ namespace PapaCarlo
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int storehouseIdSelected = (int)comboBox3.SelectedValue;
-            addStorageCells(storehouseIdSelected, comboBox4);
-           
+            try
+            {
+                int storehouseIdSelected = (int)comboBox3.SelectedValue;
+                addStorageCells(storehouseIdSelected, comboBox4);
+            }
+            catch (InvalidCastException ex) { }
         }
 
        

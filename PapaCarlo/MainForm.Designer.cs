@@ -44,6 +44,7 @@
             // 
             // buttonEmployeesList
             // 
+            this.buttonEmployeesList.Enabled = false;
             this.buttonEmployeesList.Location = new System.Drawing.Point(13, 13);
             this.buttonEmployeesList.Name = "buttonEmployeesList";
             this.buttonEmployeesList.Size = new System.Drawing.Size(85, 23);
@@ -54,6 +55,7 @@
             // 
             // buttonStoragesList
             // 
+            this.buttonStoragesList.Enabled = false;
             this.buttonStoragesList.Location = new System.Drawing.Point(13, 43);
             this.buttonStoragesList.Name = "buttonStoragesList";
             this.buttonStoragesList.Size = new System.Drawing.Size(85, 23);
@@ -64,6 +66,7 @@
             // 
             // buttonCellsList
             // 
+            this.buttonCellsList.Enabled = false;
             this.buttonCellsList.Location = new System.Drawing.Point(13, 72);
             this.buttonCellsList.Name = "buttonCellsList";
             this.buttonCellsList.Size = new System.Drawing.Size(85, 23);
@@ -74,6 +77,7 @@
             // 
             // buttonGoodsList
             // 
+            this.buttonGoodsList.Enabled = false;
             this.buttonGoodsList.Location = new System.Drawing.Point(13, 101);
             this.buttonGoodsList.Name = "buttonGoodsList";
             this.buttonGoodsList.Size = new System.Drawing.Size(85, 23);
@@ -84,6 +88,7 @@
             // 
             // buttonContractorsList
             // 
+            this.buttonContractorsList.Enabled = false;
             this.buttonContractorsList.Location = new System.Drawing.Point(13, 130);
             this.buttonContractorsList.Name = "buttonContractorsList";
             this.buttonContractorsList.Size = new System.Drawing.Size(85, 23);
@@ -94,6 +99,7 @@
             // 
             // buttonCardsList
             // 
+            this.buttonCardsList.Enabled = false;
             this.buttonCardsList.Location = new System.Drawing.Point(12, 159);
             this.buttonCardsList.Name = "buttonCardsList";
             this.buttonCardsList.Size = new System.Drawing.Size(85, 23);
@@ -104,6 +110,7 @@
             // 
             // buttonSupplyList
             // 
+            this.buttonSupplyList.Enabled = false;
             this.buttonSupplyList.Location = new System.Drawing.Point(121, 15);
             this.buttonSupplyList.Name = "buttonSupplyList";
             this.buttonSupplyList.Size = new System.Drawing.Size(127, 23);
@@ -114,6 +121,7 @@
             // 
             // buttonMovementsList
             // 
+            this.buttonMovementsList.Enabled = false;
             this.buttonMovementsList.Location = new System.Drawing.Point(121, 44);
             this.buttonMovementsList.Name = "buttonMovementsList";
             this.buttonMovementsList.Size = new System.Drawing.Size(127, 23);
@@ -124,6 +132,7 @@
             // 
             // buttonShipmentsList
             // 
+            this.buttonShipmentsList.Enabled = false;
             this.buttonShipmentsList.Location = new System.Drawing.Point(121, 74);
             this.buttonShipmentsList.Name = "buttonShipmentsList";
             this.buttonShipmentsList.Size = new System.Drawing.Size(127, 23);
@@ -134,6 +143,7 @@
             // 
             // buttonOperationsList
             // 
+            this.buttonOperationsList.Enabled = false;
             this.buttonOperationsList.Location = new System.Drawing.Point(121, 103);
             this.buttonOperationsList.Name = "buttonOperationsList";
             this.buttonOperationsList.Size = new System.Drawing.Size(127, 23);
@@ -144,6 +154,7 @@
             // 
             // buttonBalance
             // 
+            this.buttonBalance.Enabled = false;
             this.buttonBalance.Location = new System.Drawing.Point(121, 132);
             this.buttonBalance.Name = "buttonBalance";
             this.buttonBalance.Size = new System.Drawing.Size(127, 23);
@@ -154,6 +165,7 @@
             // 
             // buttonPrediction
             // 
+            this.buttonPrediction.Enabled = false;
             this.buttonPrediction.Location = new System.Drawing.Point(121, 161);
             this.buttonPrediction.Name = "buttonPrediction";
             this.buttonPrediction.Size = new System.Drawing.Size(127, 23);

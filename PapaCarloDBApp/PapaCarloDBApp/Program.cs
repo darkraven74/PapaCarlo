@@ -8,7 +8,7 @@ namespace PapaCarloDBApp
 {
     public class Query
     {
-       /* public List<EmployeeTable> querySelectEmployees()
+        public List<EmployeeTable> querySelectEmployees()
         {
             using (DataBaseContext db = new DataBaseContext())
             {
@@ -25,16 +25,16 @@ namespace PapaCarloDBApp
                 }
                 return emplTable;
             }
-        }*/
+        }
 
         static void Main(string[] args)
         {
-           /* Query pr = new Query();
+            Query pr = new Query();
 
            foreach (var item in pr.querySelectEmployees())
             {
                 Console.WriteLine("{0} {1}", item.employee.Name, item.position.Name);
-            }*/
+            }
            Console.ReadLine();
            /* using (DataBaseContext db = new DataBaseContext())
             {

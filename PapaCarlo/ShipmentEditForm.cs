@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PapaCarloDBApp;
 using System.Collections;
+using System.Activities;
+using System.Activities.Statements;
+using System.Collections.Generic;
+using System.Activities.Hosting;
+using WorkflowConsoleApplication1;
 
 namespace PapaCarlo
 {
@@ -19,6 +24,7 @@ namespace PapaCarlo
          QueryProducts queryProd;
 
          int Id = -1;
+         int oldAm = 0;
 
          public ShipmentEditForm(int Id)
              : this()
@@ -82,15 +88,26 @@ namespace PapaCarlo
             c.ProductId = (int)comboBox1.SelectedValue;
             c.Amount = Int32.Parse(textBox1.Text);
             c.Date = dateTimePicker1.Value.Date;
-            if (Id == -1)
-            {
-                MessageBox.Show(query.queryAddContractShipment(c) + "");
-            }
-            else
-            {
-                c.Id = Id;
-                MessageBox.Show(query.queryUpdateContractShipment(c) + "");
-            } 
+
+            int storeId = (int)comboBox2.SelectedValue;
+
+            //Console.WriteLine("product: " + c.ProductId + "; amount: " + c.Amount + "; store: " + storeId + "; cell: " + c.StoreCellFromId);
+
+            Dictionary<string, object> arguments = new Dictionary<string, object>();
+            arguments.Add("query", query);
+            arguments.Add("contr", c);
+            arguments.Add("Id", Id);
+            arguments.Add("storeId", storeId);
+            arguments.Add("oldAmount", oldAm);
+            arguments.Add("mov", 0);
+
+
+            IDictionary<string, object> outputs = WorkflowInvoker.Invoke(new Workflow1(), arguments);
+
+            Console.WriteLine("status:  {0}", outputs["Result"]);
+
+
+            MessageBox.Show(outputs["Result"].ToString());
             this.Dispose();
         }
 
@@ -106,6 +123,7 @@ namespace PapaCarlo
             comboBox3.SelectedValue = c.StoreCellFromObj.Id;
 
             textBox1.Text = c.Amount+"";
+            oldAm = c.Amount;
         }
 
         private void addStorageCells(int storehouseIdSelected, ComboBox cb)
@@ -125,7 +143,11 @@ namespace PapaCarlo
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            addStorageCells((int)comboBox2.SelectedValue, comboBox3);
+            try
+            {
+                addStorageCells((int)comboBox2.SelectedValue, comboBox3);
+            }
+            catch (System.InvalidCastException ex) { }
         }
     }
 }

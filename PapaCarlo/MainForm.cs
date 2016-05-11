@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PapaCarloDBApp;
 
 namespace PapaCarlo
 {
@@ -28,10 +29,65 @@ namespace PapaCarlo
             buttonOperationsList.Text = Properties.Resources.Operations;
             buttonBalance.Text = Properties.Resources.Balance;
             buttonPrediction.Text = Properties.Resources.Predict;
-            
-            AuthorizationForm form = new AuthorizationForm();
-            form.ShowDialog();
+           
             this.Text = Properties.Resources.PapaCarlo;
+            if (LoginInfo.Position == 1)//Начальник
+            {
+                SupplyContractsListForm f = new SupplyContractsListForm();
+                f.ShowDialog();
+            }
+            else if (LoginInfo.Position == 2)//Бухгалтер
+            {
+                BalanceForm f = new BalanceForm();
+                f.ShowDialog();
+            }
+            else if (LoginInfo.Position == 3)//Кладовщик
+            {
+                MovementsListForm f = new MovementsListForm();
+                f.ShowDialog();
+            }
+            showButtonsForPosition();
+            
+        }
+
+        private void showButtonsForPosition()
+        {
+            if (LoginInfo.Position == 1)//Начальник
+            {
+                buttonEmployeesList.Enabled = true;
+                buttonStoragesList.Enabled = true;
+                buttonCellsList.Enabled = true;
+                buttonGoodsList.Enabled = true;
+                buttonContractorsList.Enabled = true;
+                buttonCardsList.Enabled = true;
+                buttonSupplyList.Enabled = true;
+                buttonMovementsList.Enabled = true;
+                buttonShipmentsList.Enabled = true;
+                buttonOperationsList.Enabled = true;
+                buttonBalance.Enabled = true;
+                buttonPrediction.Enabled = true;
+            }
+            else if (LoginInfo.Position == 2)//Бухгалтер
+            {
+                buttonEmployeesList.Enabled = true;
+                buttonStoragesList.Enabled = true;
+                buttonCellsList.Enabled = true;
+                buttonGoodsList.Enabled = true;
+                buttonContractorsList.Enabled = true;
+                buttonCardsList.Enabled = true;
+                buttonBalance.Enabled = true;
+                buttonPrediction.Enabled = true;
+            }
+            else if (LoginInfo.Position == 3)//Кладовщик
+            {
+                buttonStoragesList.Enabled = true;
+                buttonCellsList.Enabled = true;
+                buttonCardsList.Enabled = true;
+                buttonSupplyList.Enabled = true;
+                buttonMovementsList.Enabled = true;
+                buttonShipmentsList.Enabled = true;
+                buttonOperationsList.Enabled = true;
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)

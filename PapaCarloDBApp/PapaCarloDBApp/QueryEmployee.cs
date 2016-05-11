@@ -9,34 +9,12 @@ namespace PapaCarloDBApp
     {
         public List<EmployeeTable> querySelectEmployees()
         {
-            using (DataBaseContext db = new DataBaseContext())
-            {
-                var query = from employee in db.Employees
-                            join position in db.Positions on employee.PositionId equals position.Id
-                            select new { employee, position };
-                List<EmployeeTable> emplTable = new List<EmployeeTable>();
-    
-                foreach (var item in query)
-                {
-                    emplTable.Add(new EmployeeTable(item.employee, item.position));
-                }
-                return emplTable;
-            }
-        }
-
-        public List<EmployeeTable> querySelectEmployees(int PositionId)
-        {
-            if (PositionId == 0)
-            {
-                return querySelectEmployees();
-            }
-            else
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2) //Начальник склада, Бухгалтер  
             {
                 using (DataBaseContext db = new DataBaseContext())
                 {
                     var query = from employee in db.Employees
                                 join position in db.Positions on employee.PositionId equals position.Id
-                                where employee.PositionId == PositionId
                                 select new { employee, position };
                     List<EmployeeTable> emplTable = new List<EmployeeTable>();
 
@@ -47,93 +25,139 @@ namespace PapaCarloDBApp
                     return emplTable;
                 }
             }
+            return null;
+        }
+
+        public List<EmployeeTable> querySelectEmployees(int PositionId)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
+            {
+                if (PositionId == 0)
+                {
+                    return querySelectEmployees();
+                }
+                else
+                {
+                    using (DataBaseContext db = new DataBaseContext())
+                    {
+                        var query = from employee in db.Employees
+                                    join position in db.Positions on employee.PositionId equals position.Id
+                                    where employee.PositionId == PositionId
+                                    select new { employee, position };
+                        List<EmployeeTable> emplTable = new List<EmployeeTable>();
+
+                        foreach (var item in query)
+                        {
+                            emplTable.Add(new EmployeeTable(item.employee, item.position));
+                        }
+                        return emplTable;
+                    }
+                }
+            }
+            return null;
         }
 
         public List<Position> querySelectPositions()
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
             {
-                var query = from position in db.Positions 
-                            select position;
-                return query.ToList();
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from position in db.Positions
+                                select position;
+                    return query.ToList();
 
+                }
             }
+            return null;
         }
 
-        public int queryGetUserByCredentials(string login, string password)
+        public List<Employee> queryGetUserByCredentials(string login, string password)
         {
             using (DataBaseContext db = new DataBaseContext())
-            {
-                var query = from user in db.Employees
-                            where user.Login == login
-                            where user.Password == password
-                            select user;
-                return query.Count();
-            }
+                {
+                    var query = from user in db.Employees
+                                where user.Login == login
+                                where user.Password == password
+                                select user;
+                    return query.ToList();
+                }
         }
 
         public bool queryAddEmployee(Employee empl)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    db.Employees.Add(empl);
-                    db.SaveChanges();
+                    try
+                    {
+                        db.Employees.Add(empl);
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;//"You entered wrong data";//e.Message;
+                    }
+                    return true; //"Your data successfully added.";
                 }
-                catch (Exception e)
-                {
-                    return false;//"You entered wrong data";//e.Message;
-                }
-                return true; //"Your data successfully added.";
             }
+            return false;
         }
 
         public bool queryUpdateEmployee(Employee empl)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    Employee employee=db.Employees.Find(empl.Id);
-  
-                    employee.Name = empl.Name;
-                    employee.Surname= empl.Surname;
-                    employee.Patronymic = empl.Patronymic;
-                    employee.Login= empl.Login;
-                    employee.Password = empl.Password;
-                    employee.PositionId= empl.PositionId;
+                    try
+                    {
+                        Employee employee = db.Employees.Find(empl.Id);
 
-                    db.SaveChanges();
+                        employee.Name = empl.Name;
+                        employee.Surname = empl.Surname;
+                        employee.Patronymic = empl.Patronymic;
+                        employee.Login = empl.Login;
+                        employee.Password = empl.Password;
+                        employee.PositionId = empl.PositionId;
+
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;//"Your data successfully added.";
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;//"Your data successfully added.";
             }
+            return false;
         }
 
         public bool queryDeleteEmployee(int Id)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
             {
-
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    Employee employee = db.Employees.Find(Id);
-                    db.Employees.Remove(employee);
 
-                    db.SaveChanges();
+                    try
+                    {
+                        Employee employee = db.Employees.Find(Id);
+                        db.Employees.Remove(employee);
+
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;//"Your data successfully added.";
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;//"Your data successfully added.";
             }
-        }
+            return false;
 
+        }
     }
 
 }

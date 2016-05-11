@@ -1,32 +1,56 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PapaCarlo", "PapaCarlo.csproj", "{514618EF-5D51-4E03-9A25-2E6E22B395B3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PapaCarloDBApp", "..\PapaCarloDBApp\PapaCarloDBApp\PapaCarloDBApp.csproj", "{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowConsoleApplication1", "WorkflowConsoleApplication1\WorkflowConsoleApplication1.csproj", "{2191618E-FF6B-4C3F-AD02-746B5CB3783E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Debug|Any CPU.Build.0 = Debug|x86
+		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Debug|x86.ActiveCfg = Debug|x86
 		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Debug|x86.Build.0 = Debug|x86
 		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Release|Mixed Platforms.Build.0 = Release|x86
 		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Release|x86.ActiveCfg = Release|x86
 		{514618EF-5D51-4E03-9A25-2E6E22B395B3}.Release|x86.Build.0 = Release|x86
 		{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}.Debug|x86.ActiveCfg = Debug|x86
 		{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}.Debug|x86.Build.0 = Debug|x86
 		{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}.Release|Any CPU.ActiveCfg = Release|x86
+		{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}.Release|Mixed Platforms.Build.0 = Release|x86
 		{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}.Release|x86.ActiveCfg = Release|x86
 		{EB4CA28C-DB91-44B6-BABB-F173D5BCB7A6}.Release|x86.Build.0 = Release|x86
+		{2191618E-FF6B-4C3F-AD02-746B5CB3783E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{2191618E-FF6B-4C3F-AD02-746B5CB3783E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{2191618E-FF6B-4C3F-AD02-746B5CB3783E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{2191618E-FF6B-4C3F-AD02-746B5CB3783E}.Debug|x86.ActiveCfg = Debug|x86
+		{2191618E-FF6B-4C3F-AD02-746B5CB3783E}.Debug|x86.Build.0 = Debug|x86
+		{2191618E-FF6B-4C3F-AD02-746B5CB3783E}.Release|Any CPU.ActiveCfg = Release|x86
+		{2191618E-FF6B-4C3F-AD02-746B5CB3783E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{2191618E-FF6B-4C3F-AD02-746B5CB3783E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{2191618E-FF6B-4C3F-AD02-746B5CB3783E}.Release|x86.ActiveCfg = Release|x86
+		{2191618E-FF6B-4C3F-AD02-746B5CB3783E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

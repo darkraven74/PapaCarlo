@@ -9,85 +9,109 @@ namespace PapaCarloDBApp
     {
         public List<Contractor> querySelectContractors(int contractorType)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3) 
             {
-                var query = from c in db.Contractors
-                            select c;
-
-                if (contractorType > 0)
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    query = from c in db.Contractors
-                            where c.Type == contractorType
-                            select c;
+                    var query = from c in db.Contractors
+                                select c;
+
+                    if (contractorType > 0)
+                    {
+                        query = from c in db.Contractors
+                                where c.Type == contractorType
+                                select c;
+                    }
+
+                    return query.ToList();
                 }
-                
-                return query.ToList();
+
             }
+            return null;
         }
 
         public bool queryAddContractor(Contractor c)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2) //Начальник или бухгалтер
             {
-                try
+
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    db.Contractors.Add(c);
-                    db.SaveChanges();
+                    try
+                    {
+                        db.Contractors.Add(c);
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
+
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true; 
             }
+            return false;
         }
 
         public bool queryUpdateContractor(Contractor c)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2) //Начальник или бухгалтер
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    Contractor contractor = db.Contractors.Find(c.Id);
+                    try
+                    {
+                        Contractor contractor = db.Contractors.Find(c.Id);
 
-                    contractor.Name = c.Name;
-                    contractor.Type = c.Type;
+                        contractor.Name = c.Name;
+                        contractor.Type = c.Type;
 
-                    db.SaveChanges();
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
         }
 
         public bool queryDeleteContractor(int Id)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2) //Начальник или бухгалтер
             {
-                try
+                using (DataBaseContext db = new DataBaseContext())
                 {
-                    Contractor contractor = db.Contractors.Find(Id);
-                    db.Contractors.Remove(contractor);
+                    try
+                    {
+                        Contractor contractor = db.Contractors.Find(Id);
+                        db.Contractors.Remove(contractor);
 
-                    db.SaveChanges();
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                catch (Exception e)
-                {
-                    return false;
-                }
-                return true;
             }
+            return false;
+
         }
 
         public Contractor queryFindContractorById(int Id)
         {
-            using (DataBaseContext db = new DataBaseContext())
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2) //Начальник или бухгалтер
             {
-                return db.Contractors.Find(Id);
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    return db.Contractors.Find(Id);
+                }
             }
+            return null;
         }
     }
 }

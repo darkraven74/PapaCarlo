@@ -19,13 +19,10 @@ namespace PapaCarlo
             this.Text = Properties.Resources.Authorization;
             labelLogin.Text = Properties.Resources.Login;
             labelPassword.Text = Properties.Resources.Password;
-            labelGroup.Text = Properties.Resources.Group;
             textBoxLogin.Text = "user";
             textBoxPassword.Text = "1234";
             textBoxPassword.UseSystemPasswordChar = true;
             buttonEnter.Text = Properties.Resources.Enter;
-            comboBox1.DataSource = new List<String> { Properties.Resources.Storekeeper,
-                Properties.Resources.Accountant, Properties.Resources.Chief };
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -36,11 +33,15 @@ namespace PapaCarlo
         private void buttonEnter_Click(object sender, EventArgs e)
         {
             QueryEmployee pr = new QueryEmployee();
-            int count = pr.queryGetUserByCredentials(textBoxLogin.Text, textBoxPassword.Text);
-            if (count==1)
-            {
-                this.Dispose();
-            }
+            Employee currentEmployee = pr.queryGetUserByCredentials(textBoxLogin.Text, textBoxPassword.Text)[0];
+
+            LoginInfo.UserID = currentEmployee.Id;
+            LoginInfo.Position = currentEmployee.PositionId;
+
+            this.Visible = false;
+            MainForm f = new MainForm();
+            f.ShowDialog();
+            this.Dispose();
         }
     }
 }
