@@ -22,6 +22,23 @@ namespace PapaCarloDBApp
             return null;
         }
 
+        public List<Storehouse> querySelectStorehousesBySearch(string name, string address)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from storehouse in db.Storehouses
+                                where (storehouse.Name.Contains(name) &&
+                                storehouse.Address.Contains(address))
+                                select storehouse;
+                    return query.ToList();
+
+                }
+            }
+            return null;
+        }
+
         public List<StoreCellTable> querySelectStoreCells(int storehouseId)
         {
             if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
@@ -39,6 +56,74 @@ namespace PapaCarloDBApp
                                 where storecell.StorehouseId == storehouseId
                                 select new { storehouse, storecell };
                     }
+                    List<StoreCellTable> table = new List<StoreCellTable>();
+
+                    foreach (var item in query)
+                    {
+                        table.Add(new StoreCellTable(item.storecell, item.storehouse));
+                    }
+                    return table;
+
+                }
+            }
+            return null;
+        }
+
+        public List<StoreCellTable> querySelectStoreCellsBySearch(string description, int cellId)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from storecell in db.StoreCells
+                                join storehouse in db.Storehouses on storecell.StorehouseId equals storehouse.Id
+                                where (storecell.Description.Contains(description))
+                                select new { storehouse, storecell };
+
+                    if (cellId > 0)
+                    {
+                        query = from storecell in db.StoreCells
+                                join storehouse in db.Storehouses on storecell.StorehouseId equals storehouse.Id
+                                where (storecell.Description.Contains(description) &&
+                                storecell.Id == cellId)
+                                select new { storehouse, storecell };
+                    }
+                    
+                    List<StoreCellTable> table = new List<StoreCellTable>();
+
+                    foreach (var item in query)
+                    {
+                        table.Add(new StoreCellTable(item.storecell, item.storehouse));
+                    }
+                    return table;
+
+                }
+            }
+            return null;
+        }
+
+        public List<StoreCellTable> querySelectStoreCellsBySearch(string description, int cellId, int storehouseId)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from storecell in db.StoreCells
+                                join storehouse in db.Storehouses on storecell.StorehouseId equals storehouse.Id
+                                where (storecell.Description.Contains(description) &&
+                                storecell.StorehouseId == storehouseId)
+                                select new { storehouse, storecell };
+
+                    if (cellId > 0)
+                    {
+                        query = from storecell in db.StoreCells
+                                join storehouse in db.Storehouses on storecell.StorehouseId equals storehouse.Id
+                                where (storecell.Description.Contains(description) &&
+                                storecell.Id == cellId &&
+                                storecell.StorehouseId==storehouseId)
+                                select new { storehouse, storecell };
+                    }
+
                     List<StoreCellTable> table = new List<StoreCellTable>();
 
                     foreach (var item in query)

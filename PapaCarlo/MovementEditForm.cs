@@ -9,10 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PapaCarloDBApp;
 using System.Collections;
-using System.Activities;
-using System.Activities.Statements;
-using System.Collections.Generic;
-using System.Activities.Hosting;
 
 namespace PapaCarlo
 {
@@ -21,19 +17,20 @@ namespace PapaCarlo
          QueryContractMove query;
          QueryStore queryStore;
          QueryProducts queryProd;
+         MovementsListForm instance;
 
          int Id = -1;
-         int oldAm = 0;
 
-         public MovementEditForm(int Id)
-             : this()
+         public MovementEditForm(int Id, MovementsListForm instance)
+             : this(instance)
         {
             this.Id = Id;
             addDataForUpdate();
         }
 
-        public MovementEditForm()
+        public MovementEditForm(MovementsListForm instance)
         {
+            this.instance = instance;
             InitializeComponent();
 
             query = new QueryContractMove();
@@ -51,40 +48,39 @@ namespace PapaCarlo
             buttonCancel.Text = Properties.Resources.Cancel;
             buttonOK.Text = Properties.Resources.OK;
 
-            ArrayList lObj1 = new ArrayList();
+            List<ObjectComboBox> lObj1 = new List<ObjectComboBox>();
 
             foreach (var item in queryStore.querySelectStorehouses())
             {
-                lObj1.Add(new { Id = item.Id, StorehouseName = item.Name });
+                lObj1.Add(new ObjectComboBox(item.Id, item.Name));
             }
 
-            ArrayList lObj3 = new ArrayList();
+            comboBoxStorehouseFrom.DataSource = lObj1;
+            comboBoxStorehouseFrom.ValueMember = "Id";
+            comboBoxStorehouseFrom.DisplayMember = "Name";
+
+            List<ObjectComboBox> lObj3 = new List<ObjectComboBox>();
 
             foreach (var item in queryStore.querySelectStorehouses())
             {
-                lObj3.Add(new { Id = item.Id, StorehouseName = item.Name });
+                lObj3.Add(new ObjectComboBox(item.Id, item.Name));
             }
 
-            comboBox1.DataSource = lObj1;
-            comboBox1.ValueMember = "Id";
-            comboBox1.DisplayMember = "StorehouseName";
+            comboBoxStorehouseTo.DataSource = lObj3;
+            comboBoxStorehouseTo.ValueMember = "Id";
+            comboBoxStorehouseTo.DisplayMember = "Name";
 
-            comboBox3.DataSource = lObj3;
-            comboBox3.ValueMember = "Id";
-            comboBox3.DisplayMember = "StorehouseName";
-
-
-            ArrayList lObjPr = new ArrayList();
+            List<ObjectComboBox> lObjPr = new List<ObjectComboBox>();
 
             foreach (var item in queryProd.querySelectProducts())
             {
-                lObjPr.Add(new { Id = item.Id, Name = item.Name });
+                lObjPr.Add(new ObjectComboBox(item.Id, item.Name));
             }
 
-            comboBox5.DataSource = lObjPr;
+            comboBoxProducts.DataSource = lObjPr;
 
-            comboBox5.ValueMember = "Id";
-            comboBox5.DisplayMember = "Name"; 
+            comboBoxProducts.ValueMember = "Id";
+            comboBoxProducts.DisplayMember = "Name"; 
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -94,94 +90,27 @@ namespace PapaCarlo
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-           /* ContractMove c = new ContractMove();
-            c.StoreCellFromId = (int)comboBox2.SelectedValue;
-            c.StoreCellToId = (int)comboBox4.SelectedValue;
+            ContractMove c = new ContractMove();
+            ObjectComboBox obj2 = (ObjectComboBox)comboBoxCellFrom.SelectedItem;
+            c.StoreCellFromId = obj2.Id;
+            ObjectComboBox obj4 = (ObjectComboBox)comboBoxCellTo.SelectedItem;
+            c.StoreCellToId = obj4.Id;
 
-            c.ProductId = (int)comboBox5.SelectedValue;
+            ObjectComboBox objPr = (ObjectComboBox)comboBoxProducts.SelectedItem;
+            c.ProductId = objPr.Id;
             c.Amount =Int32.Parse(textBoxAmount.Text);
             
             c.Date = dateTimePicker1.Value.Date;
-            */
-
-            QueryContractShipment q = new QueryContractShipment();
-
-            ContractShipment c = new ContractShipment();
-            c.StoreCellFromId = (int)comboBox2.SelectedValue;
-
-            c.ProductId = (int)comboBox5.SelectedValue;
-            c.Amount = Int32.Parse(textBoxAmount.Text);
-            c.Date = dateTimePicker1.Value.Date;
-
-            int storeId = (int)comboBox1.SelectedValue;
-
-            Dictionary<string, object> arguments = new Dictionary<string, object>();
-            arguments.Add("query", q);
-            arguments.Add("contr", c);
-            arguments.Add("Id", -1);
-            arguments.Add("storeId", storeId);
-            arguments.Add("oldAmount", oldAm);
-            arguments.Add("mov", 1);
-
-
-            IDictionary<string, object> outputs = WorkflowInvoker.Invoke(new Shipment(), arguments);
-
-            Console.WriteLine("status:  {0}", outputs["Result"]);
-            if (!(bool)outputs["Result"])
-            {
-                MessageBox.Show("error");
-                this.Dispose();
-                return;
-            }
-
-
-            //***
-
-            c.StoreCellFromId = (int)comboBox4.SelectedValue;
-
-            c.Amount = -Int32.Parse(textBoxAmount.Text);
-
-            storeId = (int)comboBox3.SelectedValue;
-
-            arguments = new Dictionary<string, object>();
-            arguments.Add("query", q);
-            arguments.Add("contr", c);
-            arguments.Add("Id", -1);
-            arguments.Add("storeId", storeId);
-            arguments.Add("oldAmount", -oldAm);
-            arguments.Add("mov", 1);
-
-
-            outputs = WorkflowInvoker.Invoke(new Shipment(), arguments);
-
-            Console.WriteLine("status:  {0}", outputs["Result"]);
-            if (!(bool)outputs["Result"])
-            {
-                MessageBox.Show("error");
-                this.Dispose();
-                return;
-            }
-
-            ContractMove cm = new ContractMove();
-
-            cm.StoreCellFromId = (int)comboBox2.SelectedValue;
-            cm.StoreCellToId = (int)comboBox4.SelectedValue;
-
-            cm.ProductId = (int)comboBox5.SelectedValue;
-            cm.Amount = Int32.Parse(textBoxAmount.Text);
-
-            cm.Date = dateTimePicker1.Value.Date;
-
-
             if (Id == -1)
             {
-                MessageBox.Show(query.queryAddContractMove(cm) + "");
+                query.queryAddContractMove(c);
             }
             else
             {
-                cm.Id = Id;
-                MessageBox.Show(query.queryUpdateContractMove(cm) + "");
+                c.Id = Id;
+                query.queryUpdateContractMove(c);
             }
+            instance.refreshGrid();
             this.Dispose();
         }
 
@@ -191,50 +120,46 @@ namespace PapaCarlo
             if (c == null) return;
 
             dateTimePicker1.Value=c.Date;
-            comboBox1.SelectedValue = c.StoreCellFromObj.StorehouseId;
-            addStorageCells((int)comboBox1.SelectedValue, comboBox2);
-            comboBox2.SelectedValue = c.StoreCellFromId;
-            comboBox3.SelectedValue = c.StoreCellToObj.StorehouseId;
-            comboBox4.SelectedValue = c.StoreCellToId;
-            addStorageCells((int)comboBox3.SelectedValue, comboBox4);
-            comboBox5.SelectedValue = c.ProductId;
+            comboBoxStorehouseFrom.SelectedValue = c.StoreCellFromObj.StorehouseId;
+            addStorageCells((int)comboBoxStorehouseFrom.SelectedValue, comboBoxCellFrom);
+            comboBoxCellFrom.SelectedValue = c.StoreCellFromId;
+            comboBoxStorehouseTo.SelectedValue = c.StoreCellToObj.StorehouseId;
+            comboBoxCellTo.SelectedValue = c.StoreCellToId;
+            addStorageCells((int)comboBoxStorehouseTo.SelectedValue, comboBoxCellTo);
+            comboBoxProducts.SelectedValue = c.ProductId;
             textBoxAmount.Text = c.Amount+"";
-
-            oldAm = c.Amount;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                int storehouseIdSelected = (int)comboBox1.SelectedValue;
-                addStorageCells(storehouseIdSelected, comboBox2);
-            }
-            catch (Exception ex) { }
+            ObjectComboBox obj = (ObjectComboBox)comboBoxStorehouseFrom.SelectedItem;
+            int storehouseIdSelected = obj.Id;
+            addStorageCells(storehouseIdSelected, comboBoxCellFrom);
+          
         }
 
         private void addStorageCells(int storehouseIdSelected, ComboBox cb)
         {
-            ArrayList lObj = new ArrayList();
+            List<ObjectComboBox> lObj = new List<ObjectComboBox>();
 
             foreach (var item in queryStore.querySelectStoreCells(storehouseIdSelected))
             {
-                lObj.Add(new { Id = item.storeCell.Id, DescriptionCell = item.storeCell.Description });
+                lObj.Add(new ObjectComboBox(item.storeCell.Id, item.storeCell.Description));
             }
+
             cb.DataSource = lObj;
             cb.ValueMember = "Id";
-            cb.DisplayMember = "DescriptionCell";
+            cb.DisplayMember = "Name";
+            
             cb.Enabled = true;
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                int storehouseIdSelected = (int)comboBox3.SelectedValue;
-                addStorageCells(storehouseIdSelected, comboBox4);
-            }
-            catch (InvalidCastException ex) { }
+             ObjectComboBox obj = (ObjectComboBox)comboBoxStorehouseTo.SelectedItem;
+             int storehouseIdSelected = obj.Id;
+             addStorageCells(storehouseIdSelected, comboBoxCellTo);
+           
         }
 
        

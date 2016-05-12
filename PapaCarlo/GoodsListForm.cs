@@ -23,6 +23,11 @@ namespace PapaCarlo
         DataGridViewCell cel4;
         DataGridViewRow row;
 
+        private GoodsListForm getInstance()
+        {
+            return this;
+        }
+
         public GoodsListForm()
         {
             InitializeComponent();
@@ -33,18 +38,11 @@ namespace PapaCarlo
 
             labelSearch.Text = Properties.Resources.Search;
             labelColor.Text = Properties.Resources.Color;
-            ArrayList lObj = new ArrayList();
-
-            lObj.Add(Properties.Resources.All);
-            foreach (string item in query.querySelectAllColors())
-            {
-                lObj.Add(item);
-            }
-            comboBoxColors.DataSource = lObj;
+           
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
             button1.Text = Properties.Resources.Delete;
-            button2.Text = Properties.Resources.Refresh;
+            buttonRefresh.Text = Properties.Resources.Refresh;
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
@@ -53,6 +51,11 @@ namespace PapaCarlo
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Both;
+
+            searchNameBox.Text = Properties.Resources.Title;
+            searchArticleBox.Text = Properties.Resources.VendorCode;
+            searchDescriptionBox.Text = Properties.Resources.Description;
+            buttonSearch.Text = Properties.Resources.Search;
 
             DataGridViewTextBoxColumn col0 = new DataGridViewTextBoxColumn();
             col0.HeaderText = Properties.Resources.ID;
@@ -76,6 +79,21 @@ namespace PapaCarlo
             dataGridView1.Columns.Add(col4);
 
             addGridView(query.querySelectProducts());
+          
+            List<ObjectComboBox> lObj = new List<ObjectComboBox>();
+
+            lObj.Add(new ObjectComboBox(0, Properties.Resources.All));
+
+            int i = 1;
+            foreach (string item in query.querySelectAllColors())
+            {
+                lObj.Add(new ObjectComboBox(i, item));
+                i++;
+            }
+            comboBoxColors.DataSource = lObj;
+            comboBoxColors.ValueMember = "Id";
+            comboBoxColors.DisplayMember = "Name";
+
         }
 
         private void addGridView(List<Product> et)
@@ -103,7 +121,7 @@ namespace PapaCarlo
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            GoodEditForm f = new GoodEditForm();
+            GoodEditForm f = new GoodEditForm(getInstance());
             f.ShowDialog();
         }
 
@@ -111,15 +129,17 @@ namespace PapaCarlo
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
             int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
-            GoodEditForm f = new GoodEditForm(Id);
+            GoodEditForm f = new GoodEditForm(getInstance(), Id);
             f.ShowDialog();
         }
 
         private void comboBoxColors_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!comboBoxColors.SelectedValue.Equals(Properties.Resources.All))
+            ObjectComboBox obj = (ObjectComboBox)comboBoxColors.SelectedItem;
+
+            if (obj.Id!=0)
             {
-                addGridView(query.querySelectProducts((string)comboBoxColors.SelectedValue));
+                addGridView(query.querySelectProducts(obj.Name));
             }
             else
             {
@@ -130,13 +150,51 @@ namespace PapaCarlo
         private void button1_Click(object sender, EventArgs e)
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
-            MessageBox.Show(query.queryDeleteProduct((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            query.queryDeleteProduct((int)dataGridView1.Rows[selectedIndex].Cells[0].Value);
             addGridView(query.querySelectProducts());
         }
 
-        private void button2_Click(object sender, EventArgs e)
+       
+        private void buttonRefresh_Click(object sender, EventArgs e)
         {
+            refreshGrid();
+        }
+
+        public void refreshGrid(){
+            searchNameBox.Text = Properties.Resources.Title;
+            searchArticleBox.Text = Properties.Resources.VendorCode;
+            searchDescriptionBox.Text = Properties.Resources.Description;
+
             addGridView(query.querySelectProducts());
+            comboBoxColors.SelectedIndex = 0;
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            string name = searchNameBox.Text;
+            string description = searchDescriptionBox.Text;
+            ObjectComboBox obj = (ObjectComboBox)comboBoxColors.SelectedItem;
+            int article = 0;
+            string color = "";
+            try
+            {
+                if (obj.Id != 0)
+                {
+                    color = obj.Name;
+                }
+                    bool ifNumber = Int32.TryParse(searchArticleBox.Text.ToString(), out article);
+                    if (!ifNumber)
+                    {
+                        addGridView(query.querySelectProductsBySearch(name, description, color));
+                    }
+                    else
+                    {
+                        addGridView(query.querySelectProductsBySearch(name, article, description, color));
+                    }
+               
+            }
+            catch(Exception){
+            }
         }
     }
 }

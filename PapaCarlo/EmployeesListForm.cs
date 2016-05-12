@@ -26,6 +26,11 @@ namespace PapaCarlo
 
         QueryEmployee queryEmpl;
 
+        private EmployeesListForm getInstance()
+        {
+            return this;
+        }
+
         public EmployeesListForm()
         {
             InitializeComponent();
@@ -37,23 +42,17 @@ namespace PapaCarlo
             labelSearch.Text = Properties.Resources.Search;
             labelGroup.Text = Properties.Resources.Group;
 
-            ArrayList lObj = new ArrayList();
-
-            lObj.Add(new {Id = 0, PositionName = Properties.Resources.All});
-            foreach (var item in queryEmpl.querySelectPositions())
-            {
-                lObj.Add(new {Id = item.Id, PositionName = item.Name} );
-            }
             
-            comboBoxGroups.DataSource = lObj;
-            comboBoxGroups.ValueMember = "Id";
-            comboBoxGroups.DisplayMember = "PositionName";
 
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
             button1.Text = Properties.Resources.Delete;
             button2.Text = Properties.Resources.Refresh;
 
+            searchLastNameBox.Text = Properties.Resources.Surname;
+            searchFirstNameBox.Text = Properties.Resources.Name;
+            searchMiddleNameBox.Text = Properties.Resources.Patronymic;
+            buttonSearch.Text = Properties.Resources.Search;
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
@@ -96,7 +95,20 @@ namespace PapaCarlo
             dataGridView1.Columns.Add(col5);
             dataGridView1.Columns.Add(col6);
             dataGridView1.Columns[7].Visible = false;
+
             addGridView(queryEmpl.querySelectEmployees());
+
+            List<ObjectComboBox> lObj = new List<ObjectComboBox>();
+
+            lObj.Add(new ObjectComboBox(0, Properties.Resources.All));
+            foreach (var item in queryEmpl.querySelectPositions())
+            {
+                lObj.Add(new ObjectComboBox(item.Id, item.Name));
+            }
+
+            comboBoxGroups.DataSource = lObj;
+            comboBoxGroups.ValueMember = "Id";
+            comboBoxGroups.DisplayMember = "Name";
 
 
         }
@@ -130,7 +142,7 @@ namespace PapaCarlo
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            EmployeeEditForm f = new EmployeeEditForm();
+            EmployeeEditForm f = new EmployeeEditForm(getInstance());
             f.ShowDialog();
         }
 
@@ -148,7 +160,7 @@ namespace PapaCarlo
             empl.Password = (string)dataGridView1.Rows[selectedIndex].Cells[5].Value;
             empl.PositionId = (int)dataGridView1.Rows[selectedIndex].Cells[7].Value;
 
-            EmployeeEditForm f = new EmployeeEditForm(empl);
+            EmployeeEditForm f = new EmployeeEditForm(getInstance(), empl);
             f.ShowDialog();
         }
 
@@ -158,7 +170,9 @@ namespace PapaCarlo
 
         private void comboBoxGroups_SelectedIndexChanged(object sender, EventArgs e)
         {
-            addGridView(queryEmpl.querySelectEmployees((int)comboBoxGroups.SelectedValue));
+            ObjectComboBox obj = (ObjectComboBox)comboBoxGroups.SelectedItem;
+            List<EmployeeTable> list = queryEmpl.querySelectEmployees(obj.Id);
+            addGridView(list);
            
         }
 
@@ -166,13 +180,26 @@ namespace PapaCarlo
         private void button1_Click(object sender, EventArgs e)
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
-            MessageBox.Show(queryEmpl.queryDeleteEmployee((int)dataGridView1.Rows[selectedIndex].Cells[0].Value)+"");
+           queryEmpl.queryDeleteEmployee((int)dataGridView1.Rows[selectedIndex].Cells[0].Value);
             addGridView(queryEmpl.querySelectEmployees());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            refreshGrid();
+        }
+
+        public void refreshGrid()
+        {
             addGridView(queryEmpl.querySelectEmployees());
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            string lastName = searchLastNameBox.Text;
+            string firstName = searchFirstNameBox.Text;
+            string middleName = searchMiddleNameBox.Text;
+            addGridView(queryEmpl.querySelectEmployeesBySearch(lastName, firstName, middleName));
         }
     }
 }

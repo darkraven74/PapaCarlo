@@ -30,13 +30,16 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.labelSearch = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.searchLastNameBox = new System.Windows.Forms.TextBox();
             this.comboBoxGroups = new System.Windows.Forms.ComboBox();
             this.labelGroup = new System.Windows.Forms.Label();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.searchMiddleNameBox = new System.Windows.Forms.TextBox();
+            this.searchFirstNameBox = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,12 +62,12 @@
             this.labelSearch.TabIndex = 1;
             this.labelSearch.Text = "label1";
             // 
-            // textBox1
+            // searchLastNameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(65, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 20);
-            this.textBox1.TabIndex = 2;
+            this.searchLastNameBox.Location = new System.Drawing.Point(65, 13);
+            this.searchLastNameBox.Name = "searchLastNameBox";
+            this.searchLastNameBox.Size = new System.Drawing.Size(136, 20);
+            this.searchLastNameBox.TabIndex = 2;
             // 
             // comboBoxGroups
             // 
@@ -116,7 +119,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(537, 6);
+            this.button2.Location = new System.Drawing.Point(545, 13);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 8;
@@ -124,18 +127,45 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // searchMiddleNameBox
+            // 
+            this.searchMiddleNameBox.Location = new System.Drawing.Point(324, 14);
+            this.searchMiddleNameBox.Name = "searchMiddleNameBox";
+            this.searchMiddleNameBox.Size = new System.Drawing.Size(122, 20);
+            this.searchMiddleNameBox.TabIndex = 27;
+            // 
+            // searchFirstNameBox
+            // 
+            this.searchFirstNameBox.Location = new System.Drawing.Point(206, 13);
+            this.searchFirstNameBox.Name = "searchFirstNameBox";
+            this.searchFirstNameBox.Size = new System.Drawing.Size(112, 20);
+            this.searchFirstNameBox.TabIndex = 26;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(463, 13);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 25;
+            this.buttonSearch.Text = "button2";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
             // EmployeesListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 261);
+            this.Controls.Add(this.searchMiddleNameBox);
+            this.Controls.Add(this.searchFirstNameBox);
+            this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.labelGroup);
             this.Controls.Add(this.comboBoxGroups);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.searchLastNameBox);
             this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.dataGridView1);
             this.Name = "EmployeesListForm";
@@ -150,12 +180,15 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label labelSearch;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox searchLastNameBox;
         private System.Windows.Forms.ComboBox comboBoxGroups;
         private System.Windows.Forms.Label labelGroup;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox searchMiddleNameBox;
+        private System.Windows.Forms.TextBox searchFirstNameBox;
+        private System.Windows.Forms.Button buttonSearch;
     }
 }

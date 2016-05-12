@@ -21,6 +21,11 @@ namespace PapaCarlo
         DataGridViewCell cel2;
         DataGridViewRow row;
 
+        private CellsListForm getInstance()
+        {
+            return this;
+        }
+
         public CellsListForm()
         {
             InitializeComponent();
@@ -33,7 +38,9 @@ namespace PapaCarlo
             labelStorage.Text = Properties.Resources.Storage;
 
 
-           
+            searchCellIdBox.Text = Properties.Resources.ID;
+            searchDescriptionBox.Text = Properties.Resources.Description;
+            buttonSearch.Text = Properties.Resources.Search;
 
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
@@ -72,7 +79,6 @@ namespace PapaCarlo
             }
 
             comboBoxStorages.DataSource = lObj;
-
             comboBoxStorages.ValueMember = "Id";
             comboBoxStorages.DisplayMember = "Name";
         }
@@ -99,7 +105,7 @@ namespace PapaCarlo
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            CellEditForm f = new CellEditForm();
+            CellEditForm f = new CellEditForm(getInstance());
             f.ShowDialog();
         }
 
@@ -108,7 +114,7 @@ namespace PapaCarlo
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
 
             int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
-            CellEditForm f = new CellEditForm(Id);
+            CellEditForm f = new CellEditForm(getInstance(), Id);
             f.ShowDialog();
         }
 
@@ -143,18 +149,48 @@ namespace PapaCarlo
         private void button1_Click(object sender, EventArgs e)
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
-            MessageBox.Show(query.queryDeleteStoreCell((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+           query.queryDeleteStoreCell((int)dataGridView1.Rows[selectedIndex].Cells[0].Value);
             addGridView(query.querySelectStoreCells(0));
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            refreshGrid();
+        }
+
+        public void refreshGrid()
+        {
+            searchCellIdBox.Text = Properties.Resources.ID;
+            searchDescriptionBox.Text = Properties.Resources.Description;
             addGridView(query.querySelectStoreCells(0));
         }
 
         private void CellsListForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void searchDescriptionBox_TextChanged(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            string description = searchDescriptionBox.Text;
+            int id = 0;
+            bool isNumber = Int32.TryParse(searchCellIdBox.Text, out id);
+            ObjectComboBox obj = (ObjectComboBox)comboBoxStorages.SelectedItem;
+            if (obj.Id != 0)
+            {
+                addGridView(query.querySelectStoreCellsBySearch(description, id, obj.Id));
+            }
+            else
+            {
+                addGridView(query.querySelectStoreCellsBySearch(description, id));
+            }
+           
         }
     }
 }

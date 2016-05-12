@@ -22,6 +22,61 @@ namespace PapaCarloDBApp
             return null;
         }
 
+        public List<Product> querySelectProductsBySearch(string name, int article, string description)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from product in db.Products
+                                where(product.Name.Contains(name) &&
+                                product.Description.Contains(description) &&
+                                product.VendorCode.Equals(article) )
+                                select product;
+                    return query.ToList();
+
+                }
+            }
+            return null;
+        }
+
+        public List<Product> querySelectProductsBySearch(string name, string description, string color)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from product in db.Products
+                                where (product.Name.Contains(name) &&
+                                product.Description.Contains(description) &&
+                                product.Color.Contains(color))
+                                select product;
+                    return query.ToList();
+
+                }
+            }
+            return null;
+        }
+
+        public List<Product> querySelectProductsBySearch(string name, int article, string description, string color)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from product in db.Products
+                                where (product.Name.Contains(name) &&
+                                product.Description.Contains(description) &&
+                                product.Color.Contains(color) &&
+                                product.VendorCode.Equals(article))
+                                select product;
+                    return query.ToList();
+
+                }
+            }
+            return null;
+        }
+
         public List<string> querySelectAllColors()
         {
             if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  

@@ -18,18 +18,22 @@ namespace PapaCarlo
          QueryProducts queryProd;
          QueryContractors queryContractors;
 
+         SupplyListForm instance;
+
          int Id = -1;
 
-         public SuppluEditForm(int Id)
-             : this()
+         public SuppluEditForm( SupplyListForm instance, int Id)
+             : this(instance)
         {
             this.Id = Id;
             addDataForUpdate();
         }
 
-    
-    public SuppluEditForm()
+
+         public SuppluEditForm(SupplyListForm instance)
         {
+            this.instance = instance;
+
             InitializeComponent();
 
             query = new QueryContractSupply();
@@ -95,13 +99,14 @@ namespace PapaCarlo
             c.Date = dateTimePicker1.Value.Date;
             if (Id == -1)
             {
-                MessageBox.Show(query.queryAddContractSupply(c) + "");
+                query.queryAddContractSupply(c);
             }
             else
             {
                 c.Id = Id;
-                MessageBox.Show(query.queryUpdateContractSupply(c) + "");
+                query.queryUpdateContractSupply(c);
             }
+            instance.refreshGrid();
             this.Dispose();
         }
 

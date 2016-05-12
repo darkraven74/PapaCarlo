@@ -32,11 +32,14 @@
             this.buttonCreate = new System.Windows.Forms.Button();
             this.labelColor = new System.Windows.Forms.Label();
             this.comboBoxColors = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.labelSearch = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonRefresh = new System.Windows.Forms.Button();
+            this.searchDescriptionBox = new System.Windows.Forms.TextBox();
+            this.searchArticleBox = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.searchNameBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,13 +81,6 @@
             this.comboBoxColors.TabIndex = 10;
             this.comboBoxColors.SelectedIndexChanged += new System.EventHandler(this.comboBoxColors_SelectedIndexChanged);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(65, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 20);
-            this.textBox1.TabIndex = 9;
-            // 
             // labelSearch
             // 
             this.labelSearch.AutoSize = true;
@@ -112,28 +108,62 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // buttonRefresh
             // 
-            this.button2.Location = new System.Drawing.Point(534, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonRefresh.Location = new System.Drawing.Point(544, 12);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefresh.TabIndex = 15;
+            this.buttonRefresh.Text = "button2";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // searchDescriptionBox
+            // 
+            this.searchDescriptionBox.Location = new System.Drawing.Point(324, 13);
+            this.searchDescriptionBox.Name = "searchDescriptionBox";
+            this.searchDescriptionBox.Size = new System.Drawing.Size(122, 20);
+            this.searchDescriptionBox.TabIndex = 31;
+            // 
+            // searchArticleBox
+            // 
+            this.searchArticleBox.Location = new System.Drawing.Point(206, 12);
+            this.searchArticleBox.Name = "searchArticleBox";
+            this.searchArticleBox.Size = new System.Drawing.Size(112, 20);
+            this.searchArticleBox.TabIndex = 30;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(463, 12);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 29;
+            this.buttonSearch.Text = "button2";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
+            // searchNameBox
+            // 
+            this.searchNameBox.Location = new System.Drawing.Point(65, 12);
+            this.searchNameBox.Name = "searchNameBox";
+            this.searchNameBox.Size = new System.Drawing.Size(136, 20);
+            this.searchNameBox.TabIndex = 28;
             // 
             // GoodsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 261);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.searchDescriptionBox);
+            this.Controls.Add(this.searchArticleBox);
+            this.Controls.Add(this.buttonSearch);
+            this.Controls.Add(this.searchNameBox);
+            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.labelColor);
             this.Controls.Add(this.comboBoxColors);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.dataGridView1);
             this.Name = "GoodsListForm";
@@ -150,10 +180,13 @@
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Label labelColor;
         private System.Windows.Forms.ComboBox comboBoxColors;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.TextBox searchDescriptionBox;
+        private System.Windows.Forms.TextBox searchArticleBox;
+        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.TextBox searchNameBox;
     }
 }

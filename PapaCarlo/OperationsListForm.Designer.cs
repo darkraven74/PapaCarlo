@@ -32,12 +32,13 @@
             this.labelDate = new System.Windows.Forms.Label();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.searchTechCardIdBox = new System.Windows.Forms.TextBox();
             this.labelSearch = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonRefresh = new System.Windows.Forms.Button();
+            this.buttonSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,12 +79,12 @@
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
-            // textBox1
+            // searchTechCardIdBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(136, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 20);
-            this.textBox1.TabIndex = 44;
+            this.searchTechCardIdBox.Location = new System.Drawing.Point(136, 5);
+            this.searchTechCardIdBox.Name = "searchTechCardIdBox";
+            this.searchTechCardIdBox.Size = new System.Drawing.Size(136, 20);
+            this.searchTechCardIdBox.TabIndex = 44;
             // 
             // labelSearch
             // 
@@ -125,29 +126,40 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // buttonRefresh
             // 
-            this.button2.Location = new System.Drawing.Point(520, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 23);
-            this.button2.TabIndex = 51;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonRefresh.Location = new System.Drawing.Point(521, 6);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(77, 23);
+            this.buttonRefresh.TabIndex = 51;
+            this.buttonRefresh.Text = "button2";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(298, 5);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 52;
+            this.buttonSearch.Text = "button2";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // OperationsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 256);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonSearch);
+            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonCreate);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.searchTechCardIdBox);
             this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.dataGridView1);
             this.Name = "OperationsListForm";
@@ -164,11 +176,12 @@
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonCreate;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox searchTechCardIdBox;
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.Button buttonSearch;
     }
 }

@@ -20,6 +20,7 @@ namespace PapaCarlo
         DataGridViewCell cel2;
         DataGridViewCell cel3;
         DataGridViewCell cel4;
+        DataGridViewCell cel5;
         DataGridViewRow row;
 
         public BalancePredictionForm()
@@ -31,12 +32,15 @@ namespace PapaCarlo
             this.Text = Properties.Resources.Predict;
 
             labelDate.Text = Properties.Resources.Date;
-            labelStorage.Text = Properties.Resources.Storage;
-            labelCell.Text = Properties.Resources.SupplyContract;
-            labelGood.Text = Properties.Resources.Good;
+            labelSearch.Text = Properties.Resources.Search;
             checkBox1.Text = Properties.Resources.All;
 
+            searchStorehouseBox.Text = Properties.Resources.Storage;
+            searchProductBox.Text = Properties.Resources.Good;
+            searchPredictBox.Text = Properties.Resources.Predict;
 
+            buttonRefresh.Text = Properties.Resources.Refresh;
+            buttonSearch.Text = Properties.Resources.Search;
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
@@ -61,12 +65,16 @@ namespace PapaCarlo
             DataGridViewTextBoxColumn col4 = new DataGridViewTextBoxColumn();
             col4.HeaderText = Properties.Resources.Predict;
 
+            DataGridViewTextBoxColumn col5 = new DataGridViewTextBoxColumn();
+            col5.HeaderText = Properties.Resources.Date;
+
 
             dataGridView1.Columns.Add(col0);
             dataGridView1.Columns.Add(col1);
             dataGridView1.Columns.Add(col2);
             dataGridView1.Columns.Add(col3);
             dataGridView1.Columns.Add(col4);
+            dataGridView1.Columns.Add(col5);
 
             addGridView(query.querySelectReportPredict());
           
@@ -82,6 +90,7 @@ namespace PapaCarlo
                 cel2 = new DataGridViewTextBoxCell();
                 cel3 = new DataGridViewTextBoxCell();
                 cel4 = new DataGridViewTextBoxCell();
+                cel5 = new DataGridViewTextBoxCell();
                 row = new DataGridViewRow();
 
                 cel0.Value = item.reportPredict.ContractSupplyId;
@@ -89,8 +98,9 @@ namespace PapaCarlo
                 cel2.Value = item.product.Name;
                 cel3.Value = item.reportPredict.Amount;
                 cel4.Value = item.reportPredict.Predict;
+                cel5.Value = item.reportPredict.Date;
 
-                row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4);
+                row.Cells.AddRange(cel0, cel1, cel2, cel3, cel4, cel5);
                 dataGridView1.Rows.Add(row);
             }
         }
@@ -113,6 +123,45 @@ namespace PapaCarlo
                 dateTimePicker1.Enabled = true;
                 addGridView(query.querySelectReportPredict(dateTimePicker1.Value.Date));
             }
+        }
+
+        private void search_Click(object sender, EventArgs e)
+        {
+            string searchStorehouse =searchStorehouseBox.Text;
+            string searchProduct = searchProductBox.Text;
+            int searchPredict = -9999;
+            List<ReportPredictTable> list = null;
+            
+                try
+                {
+                    searchPredict = Convert.ToInt32(searchPredictBox.Text);
+                    list = query.querySelectReportPredictBySearch(searchStorehouse, searchProduct, searchPredict);
+                }
+                catch (System.FormatException e2)
+                {
+                    list = query.querySelectReportPredictBySearch(searchStorehouse, searchProduct);
+                }
+                
+            addGridView(list);
+            }
+   
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            searchStorehouseBox.Text = Properties.Resources.Storage;
+            searchProductBox.Text = Properties.Resources.Good;
+            searchPredictBox.Text = Properties.Resources.Predict;
+            addGridView(query.querySelectReportPredict());
+        }
+
+        private void labelStorage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

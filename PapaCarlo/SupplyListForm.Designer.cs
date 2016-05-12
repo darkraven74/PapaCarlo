@@ -32,20 +32,22 @@
             this.labelDate = new System.Windows.Forms.Label();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.labelSearch = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.searchContractorBox = new System.Windows.Forms.TextBox();
+            this.searchNumberlBox = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(136, 32);
+            this.dateTimePicker1.Location = new System.Drawing.Point(73, 31);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(136, 20);
             this.dateTimePicker1.TabIndex = 41;
@@ -80,13 +82,6 @@
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(136, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 20);
-            this.textBox1.TabIndex = 37;
-            // 
             // labelSearch
             // 
             this.labelSearch.AutoSize = true;
@@ -116,7 +111,7 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(294, 32);
+            this.checkBox2.Location = new System.Drawing.Point(215, 31);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(80, 17);
             this.checkBox2.TabIndex = 42;
@@ -136,7 +131,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(525, 12);
+            this.button2.Location = new System.Drawing.Point(534, 7);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 44;
@@ -144,11 +139,38 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // searchContractorBox
+            // 
+            this.searchContractorBox.Location = new System.Drawing.Point(215, 8);
+            this.searchContractorBox.Name = "searchContractorBox";
+            this.searchContractorBox.Size = new System.Drawing.Size(122, 20);
+            this.searchContractorBox.TabIndex = 63;
+            // 
+            // searchNumberlBox
+            // 
+            this.searchNumberlBox.Location = new System.Drawing.Point(73, 7);
+            this.searchNumberlBox.Name = "searchNumberlBox";
+            this.searchNumberlBox.Size = new System.Drawing.Size(136, 20);
+            this.searchNumberlBox.TabIndex = 62;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(358, 7);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 61;
+            this.buttonSearch.Text = "button2";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
             // SupplyListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 258);
+            this.Controls.Add(this.searchContractorBox);
+            this.Controls.Add(this.searchNumberlBox);
+            this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox2);
@@ -156,7 +178,6 @@
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonCreate);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.dataGridView1);
             this.Name = "SupplyListForm";
@@ -173,12 +194,14 @@
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonCreate;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox searchContractorBox;
+        private System.Windows.Forms.TextBox searchNumberlBox;
+        private System.Windows.Forms.Button buttonSearch;
     }
 }

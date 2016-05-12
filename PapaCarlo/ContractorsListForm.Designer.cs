@@ -32,11 +32,12 @@
             this.buttonCreate = new System.Windows.Forms.Button();
             this.labelContractorType = new System.Windows.Forms.Label();
             this.comboBoxContractorType = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.searchNameBox = new System.Windows.Forms.TextBox();
             this.labelSearch = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonRefresh = new System.Windows.Forms.Button();
+            this.buttonSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,12 +79,12 @@
             this.comboBoxContractorType.TabIndex = 17;
             this.comboBoxContractorType.SelectedIndexChanged += new System.EventHandler(this.comboBoxContractorType_SelectedIndexChanged);
             // 
-            // textBox1
+            // searchNameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(118, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 20);
-            this.textBox1.TabIndex = 16;
+            this.searchNameBox.Location = new System.Drawing.Point(118, 4);
+            this.searchNameBox.Name = "searchNameBox";
+            this.searchNameBox.Size = new System.Drawing.Size(136, 20);
+            this.searchNameBox.TabIndex = 16;
             // 
             // labelSearch
             // 
@@ -102,38 +103,49 @@
             this.dataGridView1.Size = new System.Drawing.Size(600, 150);
             this.dataGridView1.TabIndex = 14;
             // 
-            // button1
+            // buttonDelete
             // 
-            this.button1.Location = new System.Drawing.Point(169, 58);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonDelete.Location = new System.Drawing.Point(169, 58);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 21;
+            this.buttonDelete.Text = "button1";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // buttonRefresh
             // 
-            this.button2.Location = new System.Drawing.Point(524, 7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 22;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonRefresh.Location = new System.Drawing.Point(528, 7);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefresh.TabIndex = 22;
+            this.buttonRefresh.Text = "button2";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(447, 7);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 23;
+            this.buttonSearch.Text = "button2";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.search_Click);
             // 
             // ContractorsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(611, 252);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonSearch);
+            this.Controls.Add(this.buttonRefresh);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.labelContractorType);
             this.Controls.Add(this.comboBoxContractorType);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.searchNameBox);
             this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ContractorsListForm";
@@ -150,10 +162,11 @@
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Label labelContractorType;
         private System.Windows.Forms.ComboBox comboBoxContractorType;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox searchNameBox;
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.Button buttonSearch;
     }
 }

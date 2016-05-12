@@ -15,15 +15,17 @@ namespace PapaCarlo
     {
         QueryContractors query; 
         int Id = -1;
+        ContractorsListForm instance;
 
-        public ContractorEditForm(int Id) : this()
+        public ContractorEditForm( ContractorsListForm instance, int Id) : this(instance)
         {
             this.Id = Id;
             addDataForUpdate();
         }
 
-        public ContractorEditForm()
+        public ContractorEditForm(ContractorsListForm instance)
         {
+            this.instance = instance;
             InitializeComponent();
 
             query = new QueryContractors();
@@ -51,13 +53,14 @@ namespace PapaCarlo
             c.Type = comboBox1.SelectedIndex + 1;
             if (Id == -1)
             {
-                 MessageBox.Show(query.queryAddContractor(c)+"");
+                 query.queryAddContractor(c);
             }
             else
             {
                 c.Id = Id;
-                 MessageBox.Show(query.queryUpdateContractor(c)+"");
+                query.queryUpdateContractor(c);
             }
+            instance.refreshGrid();
             this.Dispose();
         }
 

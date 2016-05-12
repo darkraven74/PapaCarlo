@@ -43,5 +43,10 @@ namespace PapaCarlo
             f.ShowDialog();
             this.Dispose();
         }
+
+        private void AuthorizationForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

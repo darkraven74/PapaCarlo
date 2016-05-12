@@ -14,18 +14,20 @@ namespace PapaCarlo
     public partial class StorageEditForm : Form
     {
         QueryStore query;
+        StoragesListForm instance;
 
          int Id = -1;
 
-         public StorageEditForm(int Id)
-             : this()
+         public StorageEditForm(StoragesListForm instance, int Id)
+             : this(instance)
         {
             this.Id = Id;
             addDataForUpdate();
         }
 
-        public StorageEditForm()
+         public StorageEditForm(StoragesListForm instance)
         {
+            this.instance = instance;
             InitializeComponent();
 
             query = new QueryStore();
@@ -126,13 +128,14 @@ namespace PapaCarlo
 
             if (Id == -1)
             {
-                MessageBox.Show(query.queryAddStorehouse(c) + "");
+                query.queryAddStorehouse(c);
             }
             else
             {
                 c.Id = Id;
-                MessageBox.Show(query.queryUpdateStorehouse(c) + "");
+                query.queryUpdateStorehouse(c);
             }
+            instance.refreshGrid();
             this.Dispose();
         }
 

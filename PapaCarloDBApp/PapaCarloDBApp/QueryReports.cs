@@ -32,6 +32,32 @@ namespace PapaCarloDBApp
             return null;
         }
 
+        public List<ReportBalanceTable> querySelectReportBalanceBySearch(string storehouse, string product)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from c in db.ReportBalances
+                                join sc in db.StoreCells on c.StoreCellId equals sc.Id
+                                join sh in db.Storehouses on sc.StorehouseId equals sh.Id
+                                join p in db.Products on c.ProductId equals p.Id
+                                where (sh.Name.Contains(storehouse) &&
+                                p.Name.Contains(product))
+                                select new { c, p, sc, sh };
+
+                    List<ReportBalanceTable> table = new List<ReportBalanceTable>();
+
+                    foreach (var item in query)
+                    {
+                        table.Add(new ReportBalanceTable(item.c, item.p, item.sc, item.sh));
+                    }
+                    return table;
+                }
+            }
+            return null;
+        }
+
         public List<ReportBalanceTable> querySelectReportBalance()
         {
             if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
@@ -81,6 +107,57 @@ namespace PapaCarloDBApp
             return null;
         }
 
+        public List<ReportPredictTable> querySelectReportPredictBySearch(string storehouse, string product, int predict)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from c in db.ReportPredicts
+                                join sh in db.Storehouses on c.StorehouseId equals sh.Id
+                                join p in db.Products on c.ProductId equals p.Id
+                                where (sh.Name.Contains(storehouse) &&
+                                p.Name.Contains(product) &&
+                                c.Predict.Equals(predict))
+                                select new { c, p, sh };
+
+                    List<ReportPredictTable> table = new List<ReportPredictTable>();
+
+                    foreach (var item in query)
+                    {
+                        table.Add(new ReportPredictTable(item.c, item.p, item.sh));
+                    }
+                    return table;
+                }
+            }
+            return null;
+        }
+
+        public List<ReportPredictTable> querySelectReportPredictBySearch(string storehouse, string product)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from c in db.ReportPredicts
+                                join sh in db.Storehouses on c.StorehouseId equals sh.Id
+                                join p in db.Products on c.ProductId equals p.Id
+                                where (sh.Name.Contains(storehouse) &&
+                                p.Name.Contains(product))
+                                select new { c, p, sh };
+
+                    List<ReportPredictTable> table = new List<ReportPredictTable>();
+
+                    foreach (var item in query)
+                    {
+                        table.Add(new ReportPredictTable(item.c, item.p, item.sh));
+                    }
+                    return table;
+                }
+            }
+            return null;
+        }
+
         public List<ReportPredictTable> querySelectReportPredict()
         {
             if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
@@ -103,6 +180,7 @@ namespace PapaCarloDBApp
             }
             return null;
         }
+
 
         public bool queryAddReportBalance(ReportBalance c)
         {

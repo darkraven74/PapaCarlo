@@ -24,6 +24,11 @@ namespace PapaCarlo
         DataGridViewCell cel6;
         DataGridViewRow row;
 
+        private MovementsListForm getInstance()
+        {
+            return this;
+        }
+
         public MovementsListForm()
         {
             InitializeComponent();
@@ -39,6 +44,11 @@ namespace PapaCarlo
             checkBox1.Text = Properties.Resources.All;
             button1.Text = Properties.Resources.Delete;
             button2.Text = Properties.Resources.Refresh;
+
+            searchStorehouseBox.Text = Properties.Resources.Storage;
+            searchCellBox.Text = Properties.Resources.Cell;
+            searchProductBox.Text = Properties.Resources.Good;
+            buttonSearch.Text = Properties.Resources.Search;
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
@@ -111,7 +121,7 @@ namespace PapaCarlo
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            MovementEditForm f = new MovementEditForm();
+            MovementEditForm f = new MovementEditForm(getInstance());
             f.ShowDialog();
         }
 
@@ -119,7 +129,7 @@ namespace PapaCarlo
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
             int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
-            MovementEditForm f = new MovementEditForm(Id);
+            MovementEditForm f = new MovementEditForm(Id, getInstance());
             f.ShowDialog();
         }
 
@@ -145,16 +155,31 @@ namespace PapaCarlo
         private void button1_Click(object sender, EventArgs e)
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
-            MessageBox.Show(query.queryDeleteContractMove((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            query.queryDeleteContractMove((int)dataGridView1.Rows[selectedIndex].Cells[0].Value);
             addGridView(query.querySelectContractsMove());
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public void refreshGrid()
         {
             addGridView(query.querySelectContractsMove());
             dateTimePicker1.Enabled = false;
             checkBox1.Checked = true;
+        }
 
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            searchStorehouseBox.Text = Properties.Resources.Storage;
+            searchCellBox.Text = Properties.Resources.Cell;
+            searchProductBox.Text = Properties.Resources.Good; 
+            refreshGrid();
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            string storehouse = searchStorehouseBox.Text;
+            string cell = searchCellBox.Text;
+            string product = searchProductBox.Text;
+            addGridView(query.querySelectContractsMoveBySearch(storehouse, cell, product));
         }
     }
 }

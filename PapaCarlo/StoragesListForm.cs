@@ -20,6 +20,11 @@ namespace PapaCarlo
         DataGridViewCell cel1;
         DataGridViewRow row;
 
+        private StoragesListForm getInstance()
+        {
+            return this;
+        }
+
         public StoragesListForm()
         {
             InitializeComponent();
@@ -40,6 +45,10 @@ namespace PapaCarlo
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Both;
+
+            searchAddressBox.Text = Properties.Resources.Address;
+            searchStorehouseBox.Text = Properties.Resources.Title;
+            buttonSearch.Text = Properties.Resources.Search;
 
             DataGridViewTextBoxColumn col00 = new DataGridViewTextBoxColumn();
             col00.HeaderText = Properties.Resources.ID; 
@@ -78,7 +87,7 @@ namespace PapaCarlo
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            StorageEditForm f = new StorageEditForm();
+            StorageEditForm f = new StorageEditForm(getInstance());
             f.ShowDialog();
         }
 
@@ -87,20 +96,34 @@ namespace PapaCarlo
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
 
             int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
-            StorageEditForm f = new StorageEditForm(Id);
+            StorageEditForm f = new StorageEditForm(getInstance(), Id);
             f.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
-            MessageBox.Show(query.queryDeleteStorehouse((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            query.queryDeleteStorehouse((int)dataGridView1.Rows[selectedIndex].Cells[0].Value);
             addGridView(query.querySelectStorehouses());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            refreshGrid();
+        }
+
+        public void refreshGrid()
+        {
+            searchAddressBox.Text = Properties.Resources.Address;
+            searchStorehouseBox.Text = Properties.Resources.Title;
             addGridView(query.querySelectStorehouses());
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            string storehouse = searchStorehouseBox.Text;
+            string address = searchAddressBox.Text;
+            addGridView(query.querySelectStorehousesBySearch(storehouse, address));
         }
     }
 }

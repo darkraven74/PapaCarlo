@@ -16,16 +16,18 @@ namespace PapaCarlo
          QueryProducts query;
 
          int Id = -1;
+         GoodsListForm instance;
 
-         public GoodEditForm(int Id)
-             : this()
+         public GoodEditForm(GoodsListForm instance, int Id)
+             : this(instance)
         {
             this.Id = Id;
             addDataForUpdate();
         }
 
-        public GoodEditForm()
+         public GoodEditForm(GoodsListForm instance)
         {
+            this.instance = instance;
             InitializeComponent();
 
             query = new QueryProducts();
@@ -54,13 +56,14 @@ namespace PapaCarlo
 
             if (Id == -1)
             {
-                MessageBox.Show(query.queryAddProduct(c) + "");
+               query.queryAddProduct(c);
             }
             else
             {
                 c.Id = Id;
-                MessageBox.Show(query.queryUpdateProduct(c) + "");
+                query.queryUpdateProduct(c);
             }
+            instance.refreshGrid();
             this.Dispose();
         }
 

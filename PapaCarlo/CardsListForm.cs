@@ -22,6 +22,11 @@ namespace PapaCarlo
         DataGridViewCell cel4;
         DataGridViewRow row;
 
+        private CardsListForm getInstance()
+        {
+            return this;
+        }
+
         public CardsListForm()
         {
             InitializeComponent();
@@ -44,6 +49,9 @@ namespace PapaCarlo
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Both;
+
+            searchNameBox.Text = Properties.Resources.Title;
+            buttonSearch.Text = Properties.Resources.Search;
 
             DataGridViewTextBoxColumn col0 = new DataGridViewTextBoxColumn();
             col0.HeaderText = Properties.Resources.ID; 
@@ -113,7 +121,7 @@ namespace PapaCarlo
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            CardEditForm f = new CardEditForm();
+            CardEditForm f = new CardEditForm(getInstance());
             f.ShowDialog();
         }
 
@@ -123,20 +131,37 @@ namespace PapaCarlo
 
             int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value;
 
-            CardEditForm f = new CardEditForm(Id);
+            CardEditForm f = new CardEditForm(getInstance(), Id);
             f.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
-            MessageBox.Show(query.queryDeleteTechCard((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+          query.queryDeleteTechCard((int)dataGridView1.Rows[selectedIndex].Cells[0].Value);
             addGridView(query.querySelectTechCards());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            refreshGrid();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        public void refreshGrid()
+        {
+            searchNameBox.Text = Properties.Resources.Title;
             addGridView(query.querySelectTechCards());
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            string name = searchNameBox.Text; 
+            addGridView(query.querySelectTechCardBySearch(name));
         }
     }
 }

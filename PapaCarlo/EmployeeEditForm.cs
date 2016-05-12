@@ -17,16 +17,20 @@ namespace PapaCarlo
         QueryEmployee queryEmpl;
         Employee emplForUpdate;
         bool forUpdate = false;
+        EmployeesListForm instance;
 
-        public EmployeeEditForm(Employee emplForUpdate) : this()
+        public EmployeeEditForm(EmployeesListForm instance, Employee emplForUpdate)
+            : this(instance)
         {
             this.emplForUpdate = emplForUpdate;
             this.forUpdate = true;
             addDataForUpdate();
         }
 
-        public EmployeeEditForm()
+        public EmployeeEditForm(EmployeesListForm instance)
         {
+            this.instance = instance;
+            
             InitializeComponent();
 
             queryEmpl = new QueryEmployee();
@@ -82,14 +86,15 @@ namespace PapaCarlo
             emp.PositionId = (int)comboBox1.SelectedValue;
             if (!forUpdate)
             {
-                MessageBox.Show(queryEmpl.queryAddEmployee(emp).ToString());
+               queryEmpl.queryAddEmployee(emp);
             }
             else
             {
                 emp.Id = emplForUpdate.Id;
-                MessageBox.Show(queryEmpl.queryUpdateEmployee(emp).ToString());
+              queryEmpl.queryUpdateEmployee(emp);
             }
 
+            instance.refreshGrid();
             this.Dispose();
         }
 

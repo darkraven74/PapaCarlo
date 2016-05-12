@@ -33,7 +33,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxStorages = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // buttonOK
@@ -81,20 +81,20 @@
             this.label1.TabIndex = 28;
             this.label1.Text = "label1";
             // 
-            // comboBox1
+            // comboBoxStorages
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(81, 15);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(156, 21);
-            this.comboBox1.TabIndex = 34;
+            this.comboBoxStorages.FormattingEnabled = true;
+            this.comboBoxStorages.Location = new System.Drawing.Point(81, 15);
+            this.comboBoxStorages.Name = "comboBoxStorages";
+            this.comboBoxStorages.Size = new System.Drawing.Size(156, 21);
+            this.comboBoxStorages.TabIndex = 34;
             // 
             // CellEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(244, 113);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxStorages);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBox2);
@@ -114,7 +114,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxStorages;
 
     }
 }

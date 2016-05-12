@@ -30,11 +30,12 @@
         {
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.searchNameBox = new System.Windows.Forms.TextBox();
             this.labelSearch = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.buttonSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,17 +59,17 @@
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
-            // textBox1
+            // searchNameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(127, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 20);
-            this.textBox1.TabIndex = 23;
+            this.searchNameBox.Location = new System.Drawing.Point(127, 8);
+            this.searchNameBox.Name = "searchNameBox";
+            this.searchNameBox.Size = new System.Drawing.Size(136, 20);
+            this.searchNameBox.TabIndex = 23;
             // 
             // labelSearch
             // 
             this.labelSearch.AutoSize = true;
-            this.labelSearch.Location = new System.Drawing.Point(13, 16);
+            this.labelSearch.Location = new System.Drawing.Point(34, 11);
             this.labelSearch.Name = "labelSearch";
             this.labelSearch.Size = new System.Drawing.Size(35, 13);
             this.labelSearch.TabIndex = 22;
@@ -102,16 +103,27 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(279, 6);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 77;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
             // CardsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(619, 233);
+            this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonCreate);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.searchNameBox);
             this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.dataGridView1);
             this.Name = "CardsListForm";
@@ -126,10 +138,11 @@
 
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonCreate;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox searchNameBox;
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonSearch;
     }
 }

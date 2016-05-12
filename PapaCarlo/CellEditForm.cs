@@ -17,16 +17,19 @@ namespace PapaCarlo
         QueryStore query;
 
          int Id = -1;
+         CellsListForm instance;
 
-         public CellEditForm(int Id)
-             : this()
+         public CellEditForm(CellsListForm instance, int Id)
+             : this(instance)
         {
             this.Id = Id;
             addDataForUpdate();
         }
 
-        public CellEditForm()
+         public CellEditForm(CellsListForm instance)
         {
+            this.instance = instance;
+
             InitializeComponent();
 
             query = new QueryStore();
@@ -36,17 +39,17 @@ namespace PapaCarlo
             label1.Text = Properties.Resources.Storage;
             label2.Text = Properties.Resources.Description;
 
-            ArrayList lObj = new ArrayList();
+             List<ObjectComboBox> lObj = new List<ObjectComboBox>();
 
             foreach (var item in query.querySelectStorehouses())
             {
-                lObj.Add(new { Id = item.Id, StorehouseName = item.Name });
+                lObj.Add(new ObjectComboBox(item.Id, item.Name));
             }
 
-            comboBox1.DataSource = lObj;
-
-            comboBox1.ValueMember = "Id";
-            comboBox1.DisplayMember = "StorehouseName"; ;
+            comboBoxStorages.DataSource = lObj;
+            comboBoxStorages.ValueMember = "Id";
+            comboBoxStorages.DisplayMember = "Name";
+     
 
             buttonCancel.Text = Properties.Resources.Cancel;
             buttonOK.Text = Properties.Resources.OK;
@@ -61,17 +64,20 @@ namespace PapaCarlo
         private void buttonOK_Click(object sender, EventArgs e)
         {
             StoreCell c = new StoreCell();
-            c.StorehouseId = (int)comboBox1.SelectedValue;
+            ObjectComboBox obj = (ObjectComboBox)comboBoxStorages.SelectedItem;
+            c.StorehouseId = obj.Id;
             c.Description = textBox2.Text;
             if (Id == -1)
             {
-                MessageBox.Show(query.queryAddStoreCell(c) + "");
+                query.queryAddStoreCell(c);
             }
             else
             {
                 c.Id = Id;
-                MessageBox.Show(query.queryUpdateStoreCell(c) + "");
+                query.queryUpdateStoreCell(c);
             }
+
+            instance.refreshGrid();
             this.Dispose();
         }
 
@@ -81,7 +87,8 @@ namespace PapaCarlo
             if (c == null) return;
 
             textBox2.Text = c.Description;
-            comboBox1.SelectedValue = c.StorehouseId;
+            ObjectComboBox obj = (ObjectComboBox)comboBoxStorages.SelectedItem;
+            comboBoxStorages.SelectedValue = c.StorehouseId;
         }
     }
 }

@@ -30,6 +30,41 @@ namespace PapaCarloDBApp
             return null;
         }
 
+        public List<Contractor> querySelectContractorsBySearch(string name)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from c in db.Contractors
+                                where c.Name.Contains(name)
+                                select c;
+
+                    return query.ToList();
+                }
+
+            }
+            return null;
+        }
+
+        public List<Contractor> querySelectContractorsBySearch(string name, int type)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from c in db.Contractors
+                                where (c.Name.Contains(name) &&
+                                c.Type==type)
+                                select c;
+
+                    return query.ToList();
+                }
+
+            }
+            return null;
+        }
+
         public bool queryAddContractor(Contractor c)
         {
             if (LoginInfo.Position == 1 || LoginInfo.Position == 2) //Начальник или бухгалтер

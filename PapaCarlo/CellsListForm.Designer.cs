@@ -32,17 +32,19 @@
             this.buttonCreate = new System.Windows.Forms.Button();
             this.labelStorage = new System.Windows.Forms.Label();
             this.comboBoxStorages = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.searchCellIdBox = new System.Windows.Forms.TextBox();
             this.labelSearch = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.searchDescriptionBox = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(97, 67);
+            this.buttonEdit.Location = new System.Drawing.Point(97, 71);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(75, 23);
             this.buttonEdit.TabIndex = 13;
@@ -52,7 +54,7 @@
             // 
             // buttonCreate
             // 
-            this.buttonCreate.Location = new System.Drawing.Point(16, 67);
+            this.buttonCreate.Location = new System.Drawing.Point(16, 71);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(75, 23);
             this.buttonCreate.TabIndex = 12;
@@ -79,13 +81,13 @@
             this.comboBoxStorages.TabIndex = 10;
             this.comboBoxStorages.SelectedIndexChanged += new System.EventHandler(this.comboBoxStorages_SelectedIndexChanged);
             // 
-            // textBox1
+            // searchCellIdBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(65, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 20);
-            this.textBox1.TabIndex = 9;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.searchCellIdBox.Location = new System.Drawing.Point(65, 13);
+            this.searchCellIdBox.Name = "searchCellIdBox";
+            this.searchCellIdBox.Size = new System.Drawing.Size(136, 20);
+            this.searchCellIdBox.TabIndex = 9;
+            this.searchCellIdBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // labelSearch
             // 
@@ -108,7 +110,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(179, 67);
+            this.button1.Location = new System.Drawing.Point(179, 71);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 14;
@@ -118,7 +120,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(537, 10);
+            this.button2.Location = new System.Drawing.Point(537, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 15;
@@ -126,18 +128,38 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // searchDescriptionBox
+            // 
+            this.searchDescriptionBox.Location = new System.Drawing.Point(207, 14);
+            this.searchDescriptionBox.Name = "searchDescriptionBox";
+            this.searchDescriptionBox.Size = new System.Drawing.Size(122, 20);
+            this.searchDescriptionBox.TabIndex = 33;
+            this.searchDescriptionBox.TextChanged += new System.EventHandler(this.searchDescriptionBox_TextChanged);
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(346, 12);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 32;
+            this.buttonSearch.Text = "button2";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
             // CellsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 259);
+            this.Controls.Add(this.searchDescriptionBox);
+            this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.labelStorage);
             this.Controls.Add(this.comboBoxStorages);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.searchCellIdBox);
             this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.dataGridView1);
             this.Name = "CellsListForm";
@@ -155,10 +177,12 @@
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Label labelStorage;
         private System.Windows.Forms.ComboBox comboBoxStorages;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox searchCellIdBox;
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox searchDescriptionBox;
+        private System.Windows.Forms.Button buttonSearch;
     }
 }

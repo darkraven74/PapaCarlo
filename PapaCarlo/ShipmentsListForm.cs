@@ -22,6 +22,12 @@ namespace PapaCarlo
         DataGridViewCell cel4;
         DataGridViewRow row;
 
+        private ShipmentsListForm getInstance()
+        {
+            return this;
+        }
+
+
         public ShipmentsListForm()
         {
             InitializeComponent();
@@ -47,6 +53,11 @@ namespace PapaCarlo
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Both;
+
+            searchStorehouseBox.Text = Properties.Resources.Storage;
+            searchCellBox.Text = Properties.Resources.Cell;
+            searchProductBox.Text = Properties.Resources.Good;
+            buttonSearch.Text = Properties.Resources.Search;
 
             DataGridViewTextBoxColumn col0 = new DataGridViewTextBoxColumn();
             col0.HeaderText = Properties.Resources.ID;
@@ -99,7 +110,7 @@ namespace PapaCarlo
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            ShipmentEditForm f = new ShipmentEditForm();
+            ShipmentEditForm f = new ShipmentEditForm(getInstance());
             f.ShowDialog();
         }
 
@@ -107,7 +118,7 @@ namespace PapaCarlo
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
             int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
-            ShipmentEditForm f = new ShipmentEditForm(Id);
+            ShipmentEditForm f = new ShipmentEditForm(getInstance(), Id);
             f.ShowDialog();
         }
 
@@ -128,15 +139,32 @@ namespace PapaCarlo
         private void button1_Click(object sender, EventArgs e)
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
-            MessageBox.Show(query.queryDeleteContractShipment((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            query.queryDeleteContractShipment((int)dataGridView1.Rows[selectedIndex].Cells[0].Value);
             addGridView(query.querySelectContractsShipment());
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public void refreshGrid()
         {
             addGridView(query.querySelectContractsShipment());
             dateTimePicker1.Enabled = false;
             checkBox1.Checked = true;
+        }
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            searchStorehouseBox.Text = Properties.Resources.Storage;
+            searchCellBox.Text = Properties.Resources.Cell;
+            searchProductBox.Text = Properties.Resources.Good;
+
+            refreshGrid();
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            string storehouse = searchStorehouseBox.Text;
+            string cell = searchCellBox.Text;
+            string product = searchProductBox.Text;
+            addGridView(query.querySelectContractsShipmentBySearch(storehouse, cell, product));
         }
     }
 }

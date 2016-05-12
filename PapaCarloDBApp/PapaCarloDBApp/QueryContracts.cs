@@ -36,6 +36,37 @@ namespace PapaCarloDBApp
             return null;
         }
 
+        public List<ContractMoveTable> querySelectContractsMoveBySearch(string storehouse, string cell, string product)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+
+                    var query = from c in db.ContractMoves
+                                join scFrom in db.StoreCells on c.StoreCellFromId equals scFrom.Id
+                                join scTo in db.StoreCells on c.StoreCellToId equals scTo.Id
+                                join shFrom in db.Storehouses on scFrom.StorehouseId equals shFrom.Id
+                                join shTo in db.Storehouses on scTo.StorehouseId equals shTo.Id
+                                join pr in db.Products on c.ProductId equals pr.Id
+                                where ((shFrom.Name.Contains(storehouse) || shTo.Name.Contains(storehouse)) &&
+                                 (scFrom.Description.Contains(cell) || scTo.Description.Contains(cell)) &&
+                                   pr.Name.Contains(product))
+                                select new { c, scFrom, scTo, shFrom, shTo, pr };
+
+                    List<ContractMoveTable> table = new List<ContractMoveTable>();
+
+                    foreach (var item in query)
+                    {
+                        item.c.ProductObj = item.pr;
+                        table.Add(new ContractMoveTable(item.c, item.scFrom, item.scTo, item.shFrom, item.shTo));
+                    }
+                    return table;
+                }
+            }
+            return null;
+        }
+
         public List<ContractMoveTable> querySelectContractsMove()
         {
             if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3) 
@@ -180,6 +211,37 @@ namespace PapaCarloDBApp
             return null;
         }
 
+        public List<ContractSupplyTable> querySelectContractsSupplyBySearch(int number, string contractor)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from c in db.ContractSupplys
+                                join sh in db.Contractors on c.ContractorId equals sh.Id
+                                where sh.Name.Contains(contractor)
+                                select new { c, sh };
+
+                    if (number > 0)
+                    {
+                        query = from c in db.ContractSupplys
+                                join sh in db.Contractors on c.ContractorId equals sh.Id
+                                where (c.numberOfSupply == number &&
+                                sh.Name.Contains(contractor))
+                                select new { c, sh };
+                    }
+
+                    List<ContractSupplyTable> table = new List<ContractSupplyTable>();
+                    foreach (var item1 in query)
+                    {
+                        table.Add(new ContractSupplyTable(item1.c, item1.sh));
+                    }
+
+                    return table;
+                }
+            }
+            return null;
+        }
 
         public List<ContractSupplyTable> querySelectContractsSupply()
         {
@@ -363,6 +425,34 @@ namespace PapaCarloDBApp
             return null;
         }
 
+        public List<ContractShipmentTable> querySelectContractsShipmentBySearch(string storehouse, string cell, string product)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from c in db.ContractShipments
+                                join scFrom in db.StoreCells on c.StoreCellFromId equals scFrom.Id
+                                join shFrom in db.Storehouses on scFrom.StorehouseId equals shFrom.Id
+                                join pr in db.Products on c.ProductId equals pr.Id
+                                where (shFrom.Name.Contains(storehouse) &&
+                                 scFrom.Description.Contains(cell) &&
+                                   pr.Name.Contains(product))
+                                select new { c, scFrom, shFrom, pr };
+
+                    List<ContractShipmentTable> table = new List<ContractShipmentTable>();
+
+                    foreach (var item in query)
+                    {
+                        item.c.ProductObj = item.pr;
+                        table.Add(new ContractShipmentTable(item.c, item.scFrom, item.shFrom));
+                    }
+                    return table;
+                }
+            }
+            return null;
+        }
+
         public List<ContractShipmentTable> querySelectContractsShipment()
         {
             if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3) 
@@ -487,6 +577,23 @@ namespace PapaCarloDBApp
 
                     var query = from c in db.ContractTechOperations
                                 where c.Date == date
+                                select c;
+
+                    return query.ToList();
+                }
+            }
+            return null;
+        }
+
+        public List<ContractTechOperation> querySelectOperationsBySearch(int techCardId)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+
+                    var query = from c in db.ContractTechOperations
+                                where c.TechCardId == techCardId
                                 select c;
 
                     return query.ToList();

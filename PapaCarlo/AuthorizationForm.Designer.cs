@@ -90,6 +90,7 @@
             this.Controls.Add(this.labelLogin);
             this.Name = "AuthorizationForm";
             this.Text = "AuthorizationForm";
+            this.Load += new System.EventHandler(this.AuthorizationForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -54,7 +54,22 @@ namespace PapaCarloDBApp
             return null;
         }
 
-        public bool queryAddTechCard(TechnologicalCard c, List<ProductTechCard> lsp)
+        public List<TechnologicalCard> querySelectTechCardBySearch(string name)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
+            {
+                using (DataBaseContext db = new DataBaseContext())
+                {
+                    var query = from c in db.TechnologicalCards
+                                where c.Title.Contains(name)
+                                select c;                 
+                    return query.ToList();
+                }
+            }
+            return null;
+        }
+
+        public bool queryAddTechCard(TechnologicalCard c)
         {
             if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
@@ -65,14 +80,6 @@ namespace PapaCarloDBApp
                         db.TechnologicalCards.Add(c);
                         db.SaveChanges();
 
-                        int lastId = db.TechnologicalCards.Last().Id;
-                        foreach (var item in lsp)
-                        {
-                            item.TechCardId = lastId;
-                        }
-
-                        db.ProductTechCards.AddRange(lsp);
-                        db.SaveChanges();
                     }
                     catch (Exception e)
                     {
@@ -84,7 +91,7 @@ namespace PapaCarloDBApp
             return false;
         }
 
-        public bool queryUpdateTechCard(TechnologicalCard c, List<ProductTechCard> lsp)
+        public bool queryUpdateTechCard(TechnologicalCard c)
         {
             if (LoginInfo.Position == 1 || LoginInfo.Position == 2 || LoginInfo.Position == 3)
             {
@@ -98,17 +105,9 @@ namespace PapaCarloDBApp
                         card.Date = c.Date;
                         card.Title = c.Title;
 
+                        db.ProductTechCards.RemoveRange(card.ProductTechCards);
+                        card.ProductTechCards = c.ProductTechCards;
                         db.SaveChanges();
-
-                        foreach (var item in lsp)
-                        {
-                            ProductTechCard s = db.ProductTechCards.Find(IdCard);
-                            s.ProductId = item.ProductId;
-                            s.Amount = item.Amount;
-                            s.Type = item.Type;
-
-                            db.SaveChanges();
-                        }
 
                     }
                     catch (Exception e)

@@ -22,6 +22,11 @@ namespace PapaCarlo
         DataGridViewCell cel4;
         DataGridViewRow row;
 
+        private SupplyListForm getInstance()
+        {
+            return this;
+        }
+
         public SupplyListForm()
         {
             InitializeComponent();
@@ -45,6 +50,10 @@ namespace PapaCarlo
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Both;
+
+            searchContractorBox.Text = Properties.Resources.Contractor;
+            searchNumberlBox.Text = Properties.Resources.Number;
+            buttonSearch.Text = Properties.Resources.Search;
 
             DataGridViewTextBoxColumn col0 = new DataGridViewTextBoxColumn();
             col0.HeaderText = Properties.Resources.SupplyContract;
@@ -104,7 +113,7 @@ namespace PapaCarlo
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            SuppluEditForm f = new SuppluEditForm();
+            SuppluEditForm f = new SuppluEditForm(getInstance());
             f.ShowDialog();
         }
 
@@ -112,14 +121,13 @@ namespace PapaCarlo
         {
            int selectedIndex = dataGridView1.CurrentCell.RowIndex;
             int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
-            SuppluEditForm f = new SuppluEditForm(Id);
+            SuppluEditForm f = new SuppluEditForm(getInstance(), Id);
             f.ShowDialog();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             addGridView(query.querySelectContractsSupply(dateTimePicker1.Value.Date));
-           // MessageBox.Show(dateTimePicker1.Value.Date+"");
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -139,16 +147,31 @@ namespace PapaCarlo
         private void button1_Click(object sender, EventArgs e)
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
-            MessageBox.Show(query.queryDeleteContractSupply((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            query.queryDeleteContractSupply((int)dataGridView1.Rows[selectedIndex].Cells[0].Value);
             addGridView(query.querySelectContractsSupply());
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            refreshGrid();
+        }
+
+        public void refreshGrid()
+        {
+            searchContractorBox.Text = Properties.Resources.Contractor;
+            searchNumberlBox.Text = Properties.Resources.Number;
             addGridView(query.querySelectContractsSupply());
             dateTimePicker1.Enabled = false;
             checkBox1.Checked = true;
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            int number = 0;
+            string contractor = searchContractorBox.Text;
+            bool isNumber = Int32.TryParse(searchNumberlBox.Text, out number); 
+            addGridView(query.querySelectContractsSupplyBySearch(number, contractor));
         }
     }
 }

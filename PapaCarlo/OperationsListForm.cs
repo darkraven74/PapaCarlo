@@ -21,6 +21,11 @@ namespace PapaCarlo
         DataGridViewCell cel3;
         DataGridViewRow row;
 
+        private OperationsListForm getInstance()
+        {
+            return this;
+        }
+
         public OperationsListForm()
         {
             InitializeComponent();
@@ -35,7 +40,10 @@ namespace PapaCarlo
             buttonEdit.Text = Properties.Resources.Edit;
             checkBox1.Text = Properties.Resources.All;
             button1.Text = Properties.Resources.Delete;
-            button2.Text = Properties.Resources.Refresh;
+            buttonRefresh.Text = Properties.Resources.Refresh;
+
+            searchTechCardIdBox.Text = Properties.Resources.ID;
+            buttonSearch.Text = Properties.Resources.Search;
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
@@ -90,7 +98,7 @@ namespace PapaCarlo
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            OperationEditForm f = new OperationEditForm();
+            OperationEditForm f = new OperationEditForm(getInstance());
             f.ShowDialog();
         }
 
@@ -98,7 +106,7 @@ namespace PapaCarlo
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
             int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
-            OperationEditForm f = new OperationEditForm(Id);
+            OperationEditForm f = new OperationEditForm(getInstance(), Id);
             f.ShowDialog();
         }
 
@@ -119,15 +127,34 @@ namespace PapaCarlo
         private void button1_Click(object sender, EventArgs e)
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
-            MessageBox.Show(query.queryDeleteContractTechOperation((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            query.queryDeleteContractTechOperation((int)dataGridView1.Rows[selectedIndex].Cells[0].Value);
             addGridView(query.querySelectOperations());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            refreshGrid();
+        }
+
+        public void refreshGrid()
+        {
+            searchTechCardIdBox.Text = Properties.Resources.ID;
             addGridView(query.querySelectOperations());
             dateTimePicker1.Enabled = false;
             checkBox1.Checked = true;
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int techCardId = Convert.ToInt32(searchTechCardIdBox.Text);
+                addGridView(query.querySelectOperationsBySearch(techCardId));
+            }
+            catch (Exception)
+            {
+            }
+           
         }
     }
 }

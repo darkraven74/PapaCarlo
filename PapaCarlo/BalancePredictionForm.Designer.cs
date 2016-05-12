@@ -28,55 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.labelGood = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.labelCell = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.labelDate = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.labelStorage = new System.Windows.Forms.Label();
+            this.labelSearch = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.searchStorehouseBox = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.searchProductBox = new System.Windows.Forms.TextBox();
+            this.searchPredictBox = new System.Windows.Forms.TextBox();
+            this.buttonRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(119, 87);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(136, 20);
-            this.textBox3.TabIndex = 65;
-            // 
-            // labelGood
-            // 
-            this.labelGood.AutoSize = true;
-            this.labelGood.Location = new System.Drawing.Point(20, 90);
-            this.labelGood.Name = "labelGood";
-            this.labelGood.Size = new System.Drawing.Size(35, 13);
-            this.labelGood.TabIndex = 64;
-            this.labelGood.Text = "label1";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(119, 61);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(136, 20);
-            this.textBox2.TabIndex = 63;
-            // 
-            // labelCell
-            // 
-            this.labelCell.AutoSize = true;
-            this.labelCell.Location = new System.Drawing.Point(20, 64);
-            this.labelCell.Name = "labelCell";
-            this.labelCell.Size = new System.Drawing.Size(35, 13);
-            this.labelCell.TabIndex = 62;
-            this.labelCell.Text = "label1";
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(119, 9);
+            this.dateTimePicker1.Location = new System.Drawing.Point(78, 49);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(136, 20);
             this.dateTimePicker1.TabIndex = 61;
@@ -85,27 +53,20 @@
             // labelDate
             // 
             this.labelDate.AutoSize = true;
-            this.labelDate.Location = new System.Drawing.Point(20, 13);
+            this.labelDate.Location = new System.Drawing.Point(11, 49);
             this.labelDate.Name = "labelDate";
             this.labelDate.Size = new System.Drawing.Size(35, 13);
             this.labelDate.TabIndex = 60;
             this.labelDate.Text = "label1";
             // 
-            // textBox1
+            // labelSearch
             // 
-            this.textBox1.Location = new System.Drawing.Point(119, 35);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 20);
-            this.textBox1.TabIndex = 59;
-            // 
-            // labelStorage
-            // 
-            this.labelStorage.AutoSize = true;
-            this.labelStorage.Location = new System.Drawing.Point(20, 38);
-            this.labelStorage.Name = "labelStorage";
-            this.labelStorage.Size = new System.Drawing.Size(35, 13);
-            this.labelStorage.TabIndex = 58;
-            this.labelStorage.Text = "label1";
+            this.labelSearch.AutoSize = true;
+            this.labelSearch.Location = new System.Drawing.Point(12, 22);
+            this.labelSearch.Name = "labelSearch";
+            this.labelSearch.Size = new System.Drawing.Size(35, 13);
+            this.labelSearch.TabIndex = 58;
+            this.labelSearch.Text = "label1";
             // 
             // dataGridView1
             // 
@@ -120,7 +81,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(271, 12);
+            this.checkBox1.Location = new System.Drawing.Point(222, 52);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(80, 17);
             this.checkBox1.TabIndex = 69;
@@ -128,20 +89,61 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
             // 
+            // searchStorehouseBox
+            // 
+            this.searchStorehouseBox.Location = new System.Drawing.Point(78, 19);
+            this.searchStorehouseBox.Name = "searchStorehouseBox";
+            this.searchStorehouseBox.Size = new System.Drawing.Size(136, 20);
+            this.searchStorehouseBox.TabIndex = 59;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(438, 17);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 70;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.search_Click);
+            // 
+            // searchProductBox
+            // 
+            this.searchProductBox.Location = new System.Drawing.Point(222, 19);
+            this.searchProductBox.Name = "searchProductBox";
+            this.searchProductBox.Size = new System.Drawing.Size(100, 20);
+            this.searchProductBox.TabIndex = 71;
+            // 
+            // searchPredictBox
+            // 
+            this.searchPredictBox.Location = new System.Drawing.Point(332, 19);
+            this.searchPredictBox.Name = "searchPredictBox";
+            this.searchPredictBox.Size = new System.Drawing.Size(100, 20);
+            this.searchPredictBox.TabIndex = 72;
+            // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.Location = new System.Drawing.Point(519, 17);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefresh.TabIndex = 73;
+            this.buttonRefresh.Text = "button1";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
             // BalancePredictionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 271);
+            this.Controls.Add(this.buttonRefresh);
+            this.Controls.Add(this.searchPredictBox);
+            this.Controls.Add(this.searchProductBox);
+            this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.labelGood);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.labelCell);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.labelDate);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.labelStorage);
+            this.Controls.Add(this.searchStorehouseBox);
+            this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.dataGridView1);
             this.Name = "BalancePredictionForm";
             this.Text = "BalancePredictionForm";
@@ -153,15 +155,15 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label labelGood;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label labelCell;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label labelDate;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label labelStorage;
+        private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox searchStorehouseBox;
+        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.TextBox searchProductBox;
+        private System.Windows.Forms.TextBox searchPredictBox;
+        private System.Windows.Forms.Button buttonRefresh;
     }
 }

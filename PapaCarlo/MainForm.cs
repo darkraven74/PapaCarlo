@@ -33,7 +33,7 @@ namespace PapaCarlo
             this.Text = Properties.Resources.PapaCarlo;
             if (LoginInfo.Position == 1)//Начальник
             {
-                SupplyContractsListForm f = new SupplyContractsListForm();
+                SupplyListForm f = new SupplyListForm();
                 f.ShowDialog();
             }
             else if (LoginInfo.Position == 2)//Бухгалтер

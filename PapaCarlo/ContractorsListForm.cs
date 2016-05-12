@@ -20,6 +20,11 @@ namespace PapaCarlo
         DataGridViewCell cel1;
         DataGridViewRow row;
 
+        private ContractorsListForm getInstance()
+        {
+            return this;
+        }
+
         public ContractorsListForm()
         {
             InitializeComponent();
@@ -30,13 +35,13 @@ namespace PapaCarlo
 
             labelSearch.Text = Properties.Resources.Search;
             labelContractorType.Text = Properties.Resources.ContractorType;
-            comboBoxContractorType.DataSource = new List<String> { Properties.Resources.All,
-                Properties.Resources.Customer, Properties.Resources.Provider };
+          
+
             buttonCreate.Text = Properties.Resources.Create;
             buttonEdit.Text = Properties.Resources.Edit;
-            button1.Text = Properties.Resources.Delete;
-            button2.Text = Properties.Resources.Refresh;
-
+            buttonDelete.Text = Properties.Resources.Delete;
+            buttonRefresh.Text = Properties.Resources.Refresh;
+            buttonSearch.Text = Properties.Resources.Search;
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
@@ -44,7 +49,7 @@ namespace PapaCarlo
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridView1.ScrollBars = ScrollBars.Both;
+            dataGridView1.ScrollBars = ScrollBars.Both;    
 
             DataGridViewTextBoxColumn col00 = new DataGridViewTextBoxColumn();
             col00.HeaderText = Properties.Resources.ID;
@@ -60,7 +65,19 @@ namespace PapaCarlo
             dataGridView1.Columns.Add(col0);
             dataGridView1.Columns.Add(col1);
 
-            addGridView(query.querySelectContractors(0));
+           addGridView(query.querySelectContractors(0));
+
+           List<ObjectComboBox> lObj = new List<ObjectComboBox>();
+
+           lObj.Add(new ObjectComboBox(0, Properties.Resources.All));
+           lObj.Add(new ObjectComboBox(1, Properties.Resources.Customer));
+           lObj.Add(new ObjectComboBox(2, Properties.Resources.Provider));
+
+           comboBoxContractorType.DataSource = lObj;
+
+           comboBoxContractorType.ValueMember = "Id";
+           comboBoxContractorType.DisplayMember = "Name";
+
         }
 
         private void addGridView(List<Contractor> et)
@@ -75,8 +92,7 @@ namespace PapaCarlo
 
                 cel00.Value = item.Id;
                 cel0.Value = item.Name;
-
-                if (item.Type == 1)
+               if (item.Type == 1)
                 {
                     cel1.Value = Properties.Resources.Customer;
                 }
@@ -92,7 +108,7 @@ namespace PapaCarlo
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            ContractorEditForm f = new ContractorEditForm();
+            ContractorEditForm f = new ContractorEditForm(getInstance());
             f.ShowDialog();
         }
 
@@ -101,26 +117,47 @@ namespace PapaCarlo
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
 
             int Id = (int)dataGridView1.Rows[selectedIndex].Cells[0].Value; 
-            ContractorEditForm f = new ContractorEditForm(Id);
+            ContractorEditForm f = new ContractorEditForm(getInstance(), Id);
             f.ShowDialog();
         }
 
         private void comboBoxContractorType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            addGridView(query.querySelectContractors(comboBoxContractorType.SelectedIndex));
+            ObjectComboBox obj = (ObjectComboBox)comboBoxContractorType.SelectedItem;
+            List<Contractor> list = query.querySelectContractors(obj.Id);
+           addGridView(list);
            // MessageBox.Show(comboBoxContractorType.SelectedIndex+"");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             int selectedIndex = dataGridView1.CurrentCell.RowIndex;
-            MessageBox.Show(query.queryDeleteContractor((int)dataGridView1.Rows[selectedIndex].Cells[0].Value) + "");
+            query.queryDeleteContractor((int)dataGridView1.Rows[selectedIndex].Cells[0].Value);
             addGridView(query.querySelectContractors(0));
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            refreshGrid();
+        }
+
+        public void refreshGrid()
+        {
             addGridView(query.querySelectContractors(0));
+        }
+
+        private void search_Click(object sender, EventArgs e)
+        {
+             string name = searchNameBox.Text;
+             ObjectComboBox obj = (ObjectComboBox)comboBoxContractorType.SelectedItem;
+             if (obj.Id != 0)
+             {
+                 addGridView(query.querySelectContractorsBySearch(name, obj.Id));
+             }
+             else
+             {
+                 addGridView(query.querySelectContractorsBySearch(name));
+             }
         }
     }
 }

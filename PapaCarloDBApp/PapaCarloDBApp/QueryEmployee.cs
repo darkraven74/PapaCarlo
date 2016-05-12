@@ -57,6 +57,32 @@ namespace PapaCarloDBApp
             return null;
         }
 
+        public List<EmployeeTable> querySelectEmployeesBySearch(string surname, string name, string patronymic)
+        {
+            if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  
+            {
+               
+                    using (DataBaseContext db = new DataBaseContext())
+                    {
+                        var query = from employee in db.Employees
+                                    join position in db.Positions on employee.PositionId equals position.Id
+                                    where (employee.Surname.Contains(surname) &&
+                                    employee.Name.Contains(name) &&
+                                    employee.Patronymic.Contains(patronymic))
+                                    select new { employee, position };
+                        List<EmployeeTable> emplTable = new List<EmployeeTable>();
+
+                        foreach (var item in query)
+                        {
+                            emplTable.Add(new EmployeeTable(item.employee, item.position));
+                        }
+                        return emplTable;
+                    }
+                
+            }
+            return null;
+        }
+
         public List<Position> querySelectPositions()
         {
             if (LoginInfo.Position == 1 || LoginInfo.Position == 2)//Начальник склада, Бухгалтер  

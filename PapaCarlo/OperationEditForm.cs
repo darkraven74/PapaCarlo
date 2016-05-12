@@ -18,16 +18,20 @@ namespace PapaCarlo
 
          int Id = -1;
 
-         public OperationEditForm(int Id)
-             : this()
+         OperationsListForm instance;
+
+         public OperationEditForm(OperationsListForm instance, int Id)
+             : this(instance)
         {
             this.Id = Id;
             addDataForUpdate();
         }
 
-        public OperationEditForm()
+         public OperationEditForm(OperationsListForm instance)
         {
-            InitializeComponent();
+             this.instance = instance;
+             
+             InitializeComponent();
 
             query = new QueryContractTechOperations();
 
@@ -65,13 +69,14 @@ namespace PapaCarlo
             c.Date = dateTimePicker1.Value.Date;
             if (Id == -1)
             {
-                MessageBox.Show(query.queryAddContractTechOperation(c) + "");
+                query.queryAddContractTechOperation(c);
             }
             else
             {
                 c.Id = Id;
-                MessageBox.Show(query.queryUpdateContractTechOperation(c) + "");
-            } 
+                query.queryUpdateContractTechOperation(c);
+            }
+            instance.refreshGrid();
             this.Dispose();
         }
     }

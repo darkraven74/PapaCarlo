@@ -15,18 +15,22 @@ namespace PapaCarlo
     {
         QueryTechnologicalCards query; 
         int Id = -1;
+        CardsListForm instance;
+        QueryProducts queryProd;
 
-        public CardEditForm(int Id) : this()
+        public CardEditForm(CardsListForm instance, int Id) : this(instance)
         {
             this.Id = Id;
             addDataForUpdate();
         }
 
-        public CardEditForm()
+        public CardEditForm(CardsListForm instance)
         {
+            this.instance = instance;
             InitializeComponent();
 
             query = new QueryTechnologicalCards();
+            queryProd = new QueryProducts();
 
             this.Text = Properties.Resources.Card;
             label1.Text = Properties.Resources.Title;
@@ -34,7 +38,33 @@ namespace PapaCarlo
             label3.Text = Properties.Resources.OutputGoods;
             label4.Text = Properties.Resources.Date;
             buttonCancel.Text = Properties.Resources.Cancel;
+            labelAmount1.Text = Properties.Resources.Amount;
+            labelAmount2.Text = Properties.Resources.Amount;
             buttonOK.Text = Properties.Resources.OK;
+
+            List<ObjectComboBox> lObjPr1 = new List<ObjectComboBox>();
+
+            foreach (var item in queryProd.querySelectProducts())
+            {
+                lObjPr1.Add(new ObjectComboBox(item.Id, item.Name));
+            }
+
+            comboBoxProductsImport.DataSource = lObjPr1;
+
+            comboBoxProductsImport.ValueMember = "Id";
+            comboBoxProductsImport.DisplayMember = "Name";
+
+            List<ObjectComboBox> lObjPr2 = new List<ObjectComboBox>();
+
+            foreach (var item in queryProd.querySelectProducts())
+            {
+                lObjPr2.Add(new ObjectComboBox(item.Id, item.Name));
+            }
+
+            comboBoxProductsExport.DataSource = lObjPr2;
+
+            comboBoxProductsExport.ValueMember = "Id";
+            comboBoxProductsExport.DisplayMember = "Name"; 
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -44,20 +74,39 @@ namespace PapaCarlo
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            TechnologicalCard tc = new TechnologicalCard();
-            tc.Title = textBox1.Text;
-            tc.Date=dateTimePicker1.Value.Date;
-            List<ProductTechCard> ptc = new List<ProductTechCard>();
+            TechnologicalCard techCard = new TechnologicalCard();
+            techCard.Title = textBox1.Text;
+            techCard.Date=dateTimePicker1.Value.Date;
+            List<ProductTechCard> productTechCardList = new List<ProductTechCard>();
+            ObjectComboBox objPr1 = (ObjectComboBox)comboBoxProductsImport.SelectedItem;
+            ProductTechCard product = new ProductTechCard();
+            product.ProductId = objPr1.Id;
+            int amount = 0;
+            Int32.TryParse(textBoxAmountImport.Text, out amount);
+            product.Amount = amount;
+            product.Type = 1;
+            productTechCardList.Add(product);
+
+            product = new ProductTechCard();
+            objPr1 = (ObjectComboBox)comboBoxProductsExport.SelectedItem;
+            product.ProductId = objPr1.Id;
+            amount = 0;
+            Int32.TryParse(textBoxAmountExport.Text, out amount);
+            product.Amount = amount;
+            product.Type = 2;
+            productTechCardList.Add(product);
+            techCard.ProductTechCards = productTechCardList;
             
             if (Id == -1)
             {
-                MessageBox.Show(query.queryAddTechCard(tc,ptc) + "");
+                query.queryAddTechCard(techCard);
             }
             else
             {
-                tc.Id = Id;
-                MessageBox.Show(query.queryUpdateTechCard(tc, ptc) + "");
+                techCard.Id = Id;
+                query.queryUpdateTechCard(techCard);
             }
+            instance.refreshGrid();
             this.Dispose();
         }
 
@@ -68,6 +117,21 @@ namespace PapaCarlo
 
             textBox1.Text = c.technologicalCard.Title;
             dateTimePicker1.Value = c.technologicalCard.Date;
+
+            for (int i = 0; i < c.productTechCard.Count; i++){
+                if (c.productTechCard[i].Type == 1)
+                {
+                    textBoxAmountImport.Text = c.productTechCard[i].Amount + "";
+                    comboBoxProductsImport.SelectedValue = c.productTechCard[i].ProductId;
+                }
+                else
+                {
+                    textBoxAmountExport.Text = c.productTechCard[i].Amount + "";
+                    comboBoxProductsExport.SelectedValue = c.productTechCard[i].ProductId;
+                }
+            }
+               
+
         }
     }
 }
